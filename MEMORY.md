@@ -20,3 +20,5 @@
 - 技术栈固定为：Vite + React + TypeScript + Tailwind + shadcn/ui + Zustand + React Query；FastAPI + SQLAlchemy 2.0 + Pydantic v2；Supabase PostgreSQL；Vercel。
 - 界面与系统文案不要使用 emoji。
 - 图标库使用 Lucide。
+- 当前阶段优先只做前端，不做数据层，不做后端。
+- 当前前端推进顺序：先做 Dashboard。
