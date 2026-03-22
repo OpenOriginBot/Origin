@@ -25,11 +25,16 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <div className="flex min-h-screen bg-transparent text-slate-100">
-      <aside className={cn('glass-panel m-4 mr-0 rounded-[28px] transition-all', sidebarOpen ? 'w-72' : 'w-20')}>
+      <aside
+        className={cn(
+          'border-r border-slate-800/80 bg-slate-950/80 backdrop-blur transition-all',
+          sidebarOpen ? 'w-72' : 'w-20',
+        )}
+      >
         <div className="flex h-16 items-center justify-between px-4">
           <div className={cn('font-semibold tracking-tight text-white', !sidebarOpen && 'hidden')}>OpenOrigin</div>
           <button
-            className="glass-chip inline-flex h-9 w-9 items-center justify-center rounded-xl text-slate-300"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-800 bg-slate-900 text-slate-300"
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
             <ToggleIcon className="h-4 w-4" />
@@ -40,10 +45,10 @@ export function AppShell({ children }: AppShellProps) {
             <button
               key={label}
               className={cn(
-                'flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition-all',
+                'flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
                 active
-                  ? 'bg-blue-500/20 text-white shadow-[0_12px_40px_rgba(37,99,235,0.2)] ring-1 ring-blue-400/25 backdrop-blur-xl'
-                  : 'text-slate-300 hover:bg-white/5 hover:text-white',
+                  ? 'bg-blue-600 text-white shadow-[0_10px_30px_rgba(37,99,235,0.35)] hover:bg-blue-500'
+                  : 'text-slate-300 hover:bg-slate-900 hover:text-white',
               )}
             >
               <Icon className="h-4 w-4" />
@@ -52,14 +57,14 @@ export function AppShell({ children }: AppShellProps) {
           ))}
         </nav>
       </aside>
-      <div className="flex-1 p-4 pl-6">
-        <header className="glass-panel flex h-16 items-center justify-between rounded-[24px] px-6">
+      <div className="flex-1">
+        <header className="flex h-16 items-center justify-between border-b border-slate-800/80 bg-slate-950/40 px-6 backdrop-blur">
           <div>
             <h1 className="text-lg font-semibold text-white">Executive Assistant Workspace</h1>
-            <p className="text-sm text-slate-300">Client operations, project execution, and delegation.</p>
+            <p className="text-sm text-slate-400">Client operations, project execution, and delegation.</p>
           </div>
         </header>
-        <main className="pt-6">{children}</main>
+        <main className="p-6">{children}</main>
       </div>
     </div>
   );

@@ -25,4 +25,3 @@
 - OpenOrigin 前端开发端口固定为 8800。
 - OpenOrigin Dashboard 视觉方向：主色调为深蓝，元素色可使用红、绿、蓝。
 - Dashboard 已有一版深蓝主视觉实现，使用红/绿/蓝做状态强调。
-- Dashboard 正在向 glassmorphism 风格推进，当前已实现主要界面层的玻璃拟态版本。
