@@ -11,4 +11,12 @@
 - 助手的长期角色是执行助理（Executive Assistant），核心职责之一是委派任务。
 - 系统将朝多智能体团队方向发展，不急于一次性完成，而是一步一步构建。
 - 预期结构中，助手下至少有 2~3 个 agent，而这些 agent 还可以继续拥有自己的子 agent。
-- 理想架构是以“客户 / 项目”为边界组织 agent 结构，即每个客户、每个项目都有自己的 agent 层级。 
+- 理想架构是以“客户 / 项目”为边界组织 agent 结构，即每个客户、每个项目都有自己的 agent 层级。
+
+## OpenOrigin
+
+- 用户已决定新构建 `OpenOrigin` 项目。
+- 项目路径固定在 OpenClaw 主工作空间下的 `projects/OpenOrigin`。
+- 技术栈固定为：Vite + React + TypeScript + Tailwind + shadcn/ui + Zustand + React Query；FastAPI + SQLAlchemy 2.0 + Pydantic v2；Supabase PostgreSQL；Vercel。
+- 界面与系统文案不要使用 emoji。
+- 图标库使用 Lucide。
