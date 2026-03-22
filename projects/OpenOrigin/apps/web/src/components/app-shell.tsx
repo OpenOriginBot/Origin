@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { BriefcaseBusiness, FolderKanban, PanelLeftClose, PanelLeftOpen, Users } from 'lucide-react';
+import { BriefcaseBusiness, FolderKanban, Moon, PanelLeftClose, PanelLeftOpen, SunMedium, Users } from 'lucide-react';
 import { useUIStore } from '@/store/ui-store';
 import { cn } from '@/lib/utils';
 
@@ -20,35 +20,51 @@ const navigation: NavigationItem[] = [
 ];
 
 export function AppShell({ children }: AppShellProps) {
-  const { sidebarOpen, setSidebarOpen } = useUIStore();
+  const { sidebarOpen, setSidebarOpen, theme, toggleTheme } = useUIStore();
   const ToggleIcon = sidebarOpen ? PanelLeftClose : PanelLeftOpen;
+  const isDark = theme === 'dark';
 
   return (
-    <div className="flex min-h-screen bg-transparent text-slate-100">
+    <div
+      className={cn(
+        'flex min-h-screen transition-colors duration-300',
+        isDark
+          ? 'bg-[#0a0a0b] text-zinc-100'
+          : 'bg-[#f5f5f7] text-zinc-900',
+      )}
+    >
       <aside
         className={cn(
-          'border-r border-slate-800/80 bg-slate-950/80 backdrop-blur transition-all',
+          'm-4 mr-0 rounded-[28px] border transition-all duration-300',
           sidebarOpen ? 'w-72' : 'w-20',
+          isDark
+            ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
+            : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]',
         )}
       >
         <div className="flex h-16 items-center justify-between px-4">
-          <div className={cn('font-semibold tracking-tight text-white', !sidebarOpen && 'hidden')}>OpenOrigin</div>
+          <div className={cn('font-semibold tracking-tight', !sidebarOpen && 'hidden')}>OpenOrigin</div>
           <button
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-800 bg-slate-900 text-slate-300"
+            className={cn(
+              'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+              isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
+            )}
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
             <ToggleIcon className="h-4 w-4" />
           </button>
         </div>
+
         <nav className="space-y-2 px-3 py-4">
           {navigation.map(({ label, icon: Icon, active }) => (
             <button
               key={label}
               className={cn(
-                'flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
-                active
-                  ? 'bg-blue-600 text-white shadow-[0_10px_30px_rgba(37,99,235,0.35)] hover:bg-blue-500'
-                  : 'text-slate-300 hover:bg-slate-900 hover:text-white',
+                'flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition-colors',
+                active && isDark && 'bg-white text-black',
+                active && !isDark && 'bg-black text-white',
+                !active && isDark && 'text-zinc-300 hover:bg-white/5 hover:text-white',
+                !active && !isDark && 'text-zinc-700 hover:bg-black/[0.04] hover:text-black',
               )}
             >
               <Icon className="h-4 w-4" />
@@ -57,14 +73,34 @@ export function AppShell({ children }: AppShellProps) {
           ))}
         </nav>
       </aside>
-      <div className="flex-1">
-        <header className="flex h-16 items-center justify-between border-b border-slate-800/80 bg-slate-950/40 px-6 backdrop-blur">
+
+      <div className="flex-1 p-4 pl-6">
+        <header
+          className={cn(
+            'flex h-16 items-center justify-between rounded-[24px] border px-6 transition-colors duration-300',
+            isDark
+              ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
+              : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
+          )}
+        >
           <div>
-            <h1 className="text-lg font-semibold text-white">Executive Assistant Workspace</h1>
-            <p className="text-sm text-slate-400">Client operations, project execution, and delegation.</p>
+            <h1 className="text-lg font-semibold">Executive Assistant Workspace</h1>
+            <p className={cn('text-sm', isDark ? 'text-zinc-400' : 'text-zinc-500')}>Client operations, project execution, and delegation.</p>
           </div>
+
+          <button
+            className={cn(
+              'inline-flex items-center gap-2 rounded-2xl border px-3 py-2 text-sm transition-colors',
+              isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+            )}
+            onClick={toggleTheme}
+          >
+            {isDark ? <SunMedium className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            {isDark ? 'Light' : 'Dark'}
+          </button>
         </header>
-        <main className="p-6">{children}</main>
+
+        <main className="pt-6">{children}</main>
       </div>
     </div>
   );
