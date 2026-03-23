@@ -32,14 +32,14 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div
       className={cn(
-        'min-h-screen transition-colors duration-300',
+        'h-screen overflow-hidden transition-colors duration-300',
         isDark ? 'bg-[#0a0a0b] text-zinc-100' : 'bg-[#f5f5f7] text-zinc-900',
       )}
     >
-      <div className="p-4">
+      <div className="flex h-full flex-col p-4">
         <header
           className={cn(
-            'sticky top-4 z-20 flex min-h-16 items-center justify-between gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:px-6 lg:py-3',
+            'sticky top-4 z-20 flex min-h-16 shrink-0 items-center justify-between gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:px-6 lg:py-3',
             isDark
               ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
               : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
@@ -147,10 +147,10 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </header>
 
-        <div className="pt-4 md:flex md:items-start md:gap-6">
+        <div className="min-h-0 flex-1 pt-4 md:flex md:items-start md:gap-6">
           <aside
             className={cn(
-              'hidden rounded-[28px] border transition-all duration-300',
+              'hidden shrink-0 rounded-[28px] border transition-all duration-300',
               sidebarOpen ? 'md:block md:w-72' : 'md:hidden',
               isDark
                 ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
@@ -176,7 +176,7 @@ export function AppShell({ children }: AppShellProps) {
             </nav>
           </aside>
 
-          <main className="min-w-0 flex-1 pt-2 md:pt-0">{children}</main>
+          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto pt-2 md:pt-0">{children}</main>
         </div>
       </div>
     </div>
