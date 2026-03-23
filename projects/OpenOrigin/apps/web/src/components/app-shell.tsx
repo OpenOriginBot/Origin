@@ -84,7 +84,7 @@ export function AppShell({ children }: AppShellProps) {
         >
           <div
             className={cn(
-              'flex h-10 w-full items-center gap-2 rounded-xl border px-3 lg:w-1/2',
+              'flex h-10 w-full items-center gap-2 rounded-xl border px-3 lg:w-1/3',
               isDark ? 'border-white/10 bg-white/[0.04] text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-600',
             )}
           >
