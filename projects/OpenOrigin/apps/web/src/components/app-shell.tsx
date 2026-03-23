@@ -150,7 +150,7 @@ export function AppShell({ children }: AppShellProps) {
         <div className="pt-4 md:flex md:items-start md:gap-6">
           <aside
             className={cn(
-              'hidden rounded-[28px] border transition-all duration-300 md:sticky md:top-4 md:self-start',
+              'hidden rounded-[28px] border transition-all duration-300',
               sidebarOpen ? 'md:block md:w-72' : 'md:hidden',
               isDark
                 ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
