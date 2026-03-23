@@ -19,6 +19,12 @@ const navigation: NavigationItem[] = [
   { label: 'Projects', icon: FolderKanban },
 ];
 
+const brandLogo = (
+  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-emerald-400 text-xs font-semibold text-white shadow-[0_8px_24px_rgba(59,130,246,0.28)]">
+    OO
+  </div>
+);
+
 export function AppShell({ children }: AppShellProps) {
   const { sidebarOpen, setSidebarOpen, theme, toggleTheme } = useUIStore();
   const isDark = theme === 'dark';
@@ -26,71 +32,21 @@ export function AppShell({ children }: AppShellProps) {
   return (
     <div
       className={cn(
-        'flex min-h-screen transition-colors duration-300',
-        isDark
-          ? 'bg-[#0a0a0b] text-zinc-100'
-          : 'bg-[#f5f5f7] text-zinc-900',
+        'min-h-screen transition-colors duration-300',
+        isDark ? 'bg-[#0a0a0b] text-zinc-100' : 'bg-[#f5f5f7] text-zinc-900',
       )}
     >
-      <aside
-        className={cn(
-          'm-4 mr-0 hidden rounded-[28px] border transition-all duration-300',
-          sidebarOpen ? 'md:block md:w-72' : 'md:hidden',
-          isDark
-            ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
-            : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]',
-        )}
-      >
-        <div className="flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-emerald-400 text-xs font-semibold text-white shadow-[0_8px_24px_rgba(59,130,246,0.28)]">
-              OO
-            </div>
-            <div className="font-semibold tracking-tight">OpenOrigin</div>
-          </div>
-          <button
-            className={cn(
-              'hidden h-9 w-9 items-center justify-center rounded-full border transition-colors md:inline-flex',
-              isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
-            )}
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            <Menu className="h-3.5 w-3.5" />
-          </button>
-        </div>
-
-        <nav className="space-y-2 px-3 py-4">
-          {navigation.map(({ label, icon: Icon, active }) => (
-            <button
-              key={label}
-              className={cn(
-                'flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
-                active && isDark && 'bg-white text-black',
-                active && !isDark && 'bg-black text-white',
-                !active && isDark && 'text-zinc-300 hover:bg-white/5 hover:text-white',
-                !active && !isDark && 'text-zinc-700 hover:bg-black/[0.04] hover:text-black',
-              )}
-            >
-              <Icon className="h-3.5 w-3.5" />
-              {sidebarOpen ? <span>{label}</span> : null}
-            </button>
-          ))}
-        </nav>
-      </aside>
-
-      <div className="min-w-0 flex-1 p-4 md:pl-6">
+      <div className="p-4">
         <header
           className={cn(
-            'flex min-h-16 items-center justify-between gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:justify-between lg:px-6 lg:py-3',
+            'flex min-h-16 items-center justify-between gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:px-6 lg:py-3',
             isDark
               ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
               : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
           )}
         >
           <div className="flex min-w-0 items-center gap-3 lg:hidden">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-emerald-400 text-xs font-semibold text-white shadow-[0_8px_24px_rgba(59,130,246,0.28)]">
-              OO
-            </div>
+            {brandLogo}
             <div className="min-w-0">
               <div className="truncate text-sm font-semibold">OpenOrigin</div>
             </div>
@@ -176,9 +132,54 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </header>
 
-        <main className="pt-6">{children}</main>
+        <div className="pt-4 md:flex md:items-start md:gap-6">
+          <aside
+            className={cn(
+              'hidden rounded-[28px] border transition-all duration-300 md:sticky md:top-4 md:self-start',
+              sidebarOpen ? 'md:block md:w-72' : 'md:hidden',
+              isDark
+                ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
+                : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]',
+            )}
+          >
+            <div className="flex h-16 items-center justify-between px-4">
+              <div className="flex items-center gap-3">
+                {brandLogo}
+                <div className="font-semibold tracking-tight">OpenOrigin</div>
+              </div>
+              <button
+                className={cn(
+                  'hidden h-9 w-9 items-center justify-center rounded-full border transition-colors md:inline-flex',
+                  isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
+                )}
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                <Menu className="h-3.5 w-3.5" />
+              </button>
+            </div>
+
+            <nav className="space-y-2 px-3 py-4">
+              {navigation.map(({ label, icon: Icon, active }) => (
+                <button
+                  key={label}
+                  className={cn(
+                    'flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
+                    active && isDark && 'bg-white text-black',
+                    active && !isDark && 'bg-black text-white',
+                    !active && isDark && 'text-zinc-300 hover:bg-white/5 hover:text-white',
+                    !active && !isDark && 'text-zinc-700 hover:bg-black/[0.04] hover:text-black',
+                  )}
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  <span>{label}</span>
+                </button>
+              ))}
+            </nav>
+          </aside>
+
+          <main className="min-w-0 flex-1 pt-2 md:pt-0">{children}</main>
+        </div>
       </div>
     </div>
   );
 }
-
