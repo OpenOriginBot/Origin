@@ -73,23 +73,23 @@ export function AppShell({ children }: AppShellProps) {
         </nav>
       </aside>
 
-      <div className="flex-1 p-4 md:pl-6">
+      <div className="min-w-0 flex-1 p-4 md:pl-6">
         <header
           className={cn(
-            'flex h-16 items-center justify-between rounded-[24px] border px-6 transition-colors duration-300',
+            'flex min-h-16 flex-col gap-4 rounded-[24px] border px-4 py-4 transition-colors duration-300 sm:h-16 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-0',
             isDark
               ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
               : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
           )}
         >
-          <div>
+          <div className="min-w-0">
             <h1 className="text-lg font-semibold">Executive Assistant Workspace</h1>
-            <p className={cn('text-sm', isDark ? 'text-zinc-400' : 'text-zinc-500')}>Client operations, project execution, and delegation.</p>
+            <p className={cn('text-sm leading-6 sm:leading-normal', isDark ? 'text-zinc-400' : 'text-zinc-500')}>Client operations, project execution, and delegation.</p>
           </div>
 
           <button
             className={cn(
-              'inline-flex items-center gap-2 rounded-2xl border px-3 py-2 text-sm transition-colors',
+              'inline-flex w-full items-center justify-center gap-2 rounded-2xl border px-3 py-2 text-sm transition-colors sm:w-auto',
               isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
             )}
             onClick={toggleTheme}
