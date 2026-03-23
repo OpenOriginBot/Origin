@@ -45,15 +45,15 @@ function NavGroup({ title, items }: { title: string; items: NavigationItem[] }) 
           <button
             key={label}
             className={cn(
-              'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm font-medium transition-all duration-300 hover:translate-x-1',
+              'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm font-medium transition-all duration-300',
               active
                 ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
             )}
           >
-            <Icon className="h-4 w-4" />
+            <Icon className="h-4 w-4 shrink-0" />
             <span className="text-sm">{label}</span>
-            {badge ? <span className="ml-auto rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold text-primary-foreground">{badge}</span> : null}
+            {badge ? <span className="ml-auto rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold text-primary-foreground animate-pulse">{badge}</span> : null}
           </button>
         ))}
       </nav>
