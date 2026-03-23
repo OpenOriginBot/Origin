@@ -76,7 +76,7 @@ export function AppShell({ children }: AppShellProps) {
       <div className="min-w-0 flex-1 p-4 md:pl-6">
         <header
           className={cn(
-            'flex min-h-16 flex-col gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:flex-row lg:items-center lg:justify-between lg:px-6 lg:py-3',
+            'flex min-h-16 items-center gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:justify-between lg:px-6 lg:py-3',
             isDark
               ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
               : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
@@ -84,7 +84,7 @@ export function AppShell({ children }: AppShellProps) {
         >
           <div
             className={cn(
-              'flex h-10 w-full items-center gap-2 rounded-xl border px-3 lg:w-1/3',
+              'flex h-10 min-w-0 flex-1 items-center gap-2 rounded-xl border px-3 lg:max-w-[32%]',
               isDark ? 'border-white/10 bg-white/[0.04] text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-600',
             )}
           >
@@ -99,7 +99,29 @@ export function AppShell({ children }: AppShellProps) {
             />
           </div>
 
-          <div className="flex items-center justify-end gap-2">
+          <div className="flex items-center justify-end gap-2 lg:hidden">
+            <button
+              className={cn(
+                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+              )}
+              aria-label="Search"
+            >
+              <Search className="h-3.5 w-3.5" />
+            </button>
+            <button
+              className={cn(
+                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+              )}
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              aria-label="Menu"
+            >
+              <Menu className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
+          <div className="hidden items-center justify-end gap-2 lg:flex">
             <button
               className={cn(
                 'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
@@ -130,7 +152,7 @@ export function AppShell({ children }: AppShellProps) {
             </button>
             <button
               className={cn(
-                'inline-flex h-9 min-w-9 items-center justify-center rounded-xl border px-2.5 transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               aria-label="User profile"
