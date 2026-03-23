@@ -33,13 +33,13 @@ function StatCard({ label, value, detail, primary }: { label: string; value: str
   return (
     <Card
       className={cn(
-        'cursor-pointer p-3.5 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.05] hover:shadow-2xl md:p-4',
+        'group cursor-pointer p-3.5 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.05] hover:shadow-2xl md:p-4',
         primary ? 'bg-[hsl(221.2_83.2%_53.3%)] text-primary-foreground shadow-lg shadow-[0_18px_40px_rgba(59,130,246,0.28)] hover:shadow-[0_24px_50px_rgba(59,130,246,0.36)]' : 'bg-card text-foreground shadow-lg',
       )}
     >
       <div className="mb-2.5 flex items-start justify-between">
         <h3 className="text-[11px] font-medium opacity-90">{label}</h3>
-        <div className={cn('flex h-6 w-6 items-center justify-center rounded-full', primary ? 'bg-primary-foreground/20' : 'bg-primary')}>
+        <div className={cn('flex h-6 w-6 items-center justify-center rounded-full transition-transform duration-300 group-hover:scale-110', primary ? 'bg-primary-foreground/20' : 'bg-primary')}>
           <ArrowUpRight className={cn('h-3 w-3', primary ? 'text-primary-foreground' : 'text-primary-foreground')} />
         </div>
       </div>
@@ -100,8 +100,8 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="relative mb-4 h-64 overflow-hidden rounded-xl border border-border/60 bg-gradient-to-b from-background to-muted/30 p-4">
-                <div className="absolute inset-x-0 bottom-0 top-0 flex items-end gap-3 px-6 pb-6">
+              <div className="relative mb-4 h-64 overflow-hidden rounded-xl border border-border/60 bg-gradient-to-b from-background to-muted/30 p-5">
+                <div className="absolute inset-x-0 bottom-0 top-0 flex items-end gap-3 px-5 pb-5">
                   {[42, 55, 39, 66, 58, 78, 69, 88, 73, 92].map((height, index) => (
                     <div key={index} className="flex flex-1 items-end justify-center">
                       <div className="w-full rounded-t-full bg-primary/80" style={{ height: `${height}%` }} />
@@ -152,8 +152,8 @@ export default function App() {
           </div>
 
           <div className="space-y-3 md:space-y-4">
-            <Card className="p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
-              <h2 className="mb-6 text-xl font-semibold text-foreground">Reminders</h2>
+            <Card className="p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl md:p-6">
+              <h2 className="mb-5 text-xl font-semibold text-foreground md:mb-6">Reminders</h2>
               <div className="space-y-4">
                 <div className="rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
                   <h3 className="mb-1 font-semibold text-foreground">Meeting with Arc Company</h3>
@@ -166,8 +166,8 @@ export default function App() {
               </div>
             </Card>
 
-            <Card className="overflow-hidden p-4 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
-              <h2 className="mb-4 text-lg font-semibold text-foreground">Project Progress</h2>
+            <Card className="overflow-hidden p-5 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl md:p-4">
+              <h2 className="mb-5 text-lg font-semibold text-foreground md:mb-4">Project Progress</h2>
               <div className="flex flex-col items-center">
                 <div className="relative mb-4 h-40 w-40">
                   <div className="absolute inset-0 rounded-full opacity-20 [background:repeating-linear-gradient(45deg,transparent,transparent_6px,oklch(0.42_0.15_155)_6px,oklch(0.42_0.15_155)_12px)]" />
