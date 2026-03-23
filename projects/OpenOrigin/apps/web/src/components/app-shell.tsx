@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Bell, BriefcaseBusiness, FolderKanban, Mail, Menu, Moon, Search, SunMedium, Users, Wallet } from 'lucide-react';
+import { Bell, BriefcaseBusiness, FolderKanban, Mail, Menu, Moon, Search, SunMedium, Users } from 'lucide-react';
 import { useUIStore } from '@/store/ui-store';
 import { cn } from '@/lib/utils';
 
@@ -108,15 +108,6 @@ export function AppShell({ children }: AppShellProps) {
               aria-label="Mail"
             >
               <Mail className="h-3.5 w-3.5" />
-            </button>
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-              )}
-              aria-label="Wallet"
-            >
-              <Wallet className="h-3.5 w-3.5" />
             </button>
             <button
               className={cn(
