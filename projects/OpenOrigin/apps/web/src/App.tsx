@@ -1,168 +1,79 @@
-import { type ReactNode } from 'react';
 import {
   Activity,
   ArrowUpRight,
-  BriefcaseBusiness,
-  Building2,
-  CalendarRange,
-  CircleAlert,
+  ChartColumn,
   Clock3,
-  FolderKanban,
-  ListTodo,
+  MonitorSmartphone,
+  Pause,
+  Play,
+  Plus,
+  Search,
+  Smartphone,
+  Square,
   TrendingUp,
-  Users,
+  Video,
 } from 'lucide-react';
 import { AppShell } from '@/components/app-shell';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/store/ui-store';
 
-type Tone = 'red' | 'green' | 'blue';
-
 const stats = [
-  { label: 'Active clients', value: '12', change: '+2 this month', icon: Building2, tone: 'blue' as Tone },
-  { label: 'Projects in motion', value: '27', change: '8 high priority', icon: FolderKanban, tone: 'green' as Tone },
-  { label: 'Delegated tasks', value: '64', change: '11 awaiting review', icon: BriefcaseBusiness, tone: 'blue' as Tone },
-  { label: 'Pending decisions', value: '5', change: '3 due today', icon: CircleAlert, tone: 'red' as Tone },
+  { label: 'Total Projects', value: '24', detail: 'Increased from last month', primary: true },
+  { label: 'Ended Projects', value: '10', detail: 'Increased from last month' },
+  { label: 'Running Projects', value: '12', detail: 'Increased from last month' },
+  { label: 'Pending Project', value: '2', detail: 'On Discuss' },
 ] as const;
 
-const focusProjects = [
-  { client: 'Northstar Labs', project: 'Operations redesign', stage: 'Execution', progress: 72, owner: 'Strategy agent', tone: 'green' as Tone },
-  { client: 'Asteron Capital', project: 'Investor reporting system', stage: 'Review', progress: 58, owner: 'Reporting agent', tone: 'blue' as Tone },
-  { client: 'OpenOrigin', project: 'Dashboard v1', stage: 'Design', progress: 34, owner: 'Frontend agent', tone: 'red' as Tone },
+const teamMembers = [
+  { name: 'Alexandra Deff', task: 'Github Project Repository', status: 'Completed', initials: 'AD', tone: 'emerald' },
+  { name: 'Edwin Adenike', task: 'Integrate User Authentication System', status: 'In Progress', initials: 'EA', tone: 'amber' },
+  { name: 'Isaac Oluwatemilorun', task: 'Develop Search and Filter Functionality', status: 'Pending', initials: 'IO', tone: 'rose' },
+  { name: 'David Oshodi', task: 'Responsive Layout for Homepage', status: 'In Progress', initials: 'DO', tone: 'amber' },
 ] as const;
 
-const todayQueue = [
-  { title: 'Approve client delivery plan', detail: 'Northstar Labs · Operations redesign', priority: 'High', time: '09:30', tone: 'red' as Tone },
-  { title: 'Review delegation backlog', detail: 'Cross-client execution queue', priority: 'Medium', time: '11:00', tone: 'blue' as Tone },
-  { title: 'Prepare weekly status summary', detail: 'Asteron Capital · Reporting', priority: 'High', time: '16:00', tone: 'green' as Tone },
-  { title: 'Refine dashboard information architecture', detail: 'OpenOrigin · Product system', priority: 'Medium', time: '18:30', tone: 'blue' as Tone },
+const projects = [
+  { emoji: '⚡', color: 'bg-blue-500', title: 'Develop API Endpoints', due: 'Nov 26, 2024' },
+  { emoji: '🌊', color: 'bg-cyan-500', title: 'Onboarding Flow', due: 'Nov 28, 2024' },
+  { emoji: '🎨', color: 'bg-emerald-500', title: 'Build Dashboard', due: 'Nov 30, 2024' },
+  { emoji: '⚡', color: 'bg-amber-500', title: 'Optimize Page Load', due: 'Dec 5, 2024' },
+  { emoji: '🔍', color: 'bg-purple-500', title: 'Cross-Browser Testing', due: 'Dec 6, 2024' },
 ] as const;
 
-const activityFeed = [
-  { text: 'Design agent delivered revised dashboard wireframe.', tone: 'blue' as Tone },
-  { text: 'Project lead flagged 3 items that need a decision today.', tone: 'red' as Tone },
-  { text: 'Execution queue dropped from 18 to 11 overdue tasks.', tone: 'green' as Tone },
-  { text: 'New client onboarding draft is ready for review.', tone: 'blue' as Tone },
-] as const;
-
-const teamLoad = [
-  { name: 'Frontend agent', load: 'Focused', tasks: 6, tone: 'blue' as Tone },
-  { name: 'Strategy agent', load: 'Busy', tasks: 9, tone: 'red' as Tone },
-  { name: 'Reporting agent', load: 'Focused', tasks: 5, tone: 'green' as Tone },
-] as const;
-
-function toneClasses(tone: Tone, isDark: boolean) {
-  if (tone === 'red') {
-    return isDark
-      ? {
-          soft: 'border-red-400/20 bg-red-500/10 text-red-200',
-          icon: 'bg-red-500/12 text-red-300',
-          strong: 'bg-red-400',
-          text: 'text-red-300',
-        }
-      : {
-          soft: 'border-red-200 bg-red-50 text-red-700',
-          icon: 'bg-red-50 text-red-600',
-          strong: 'bg-red-500',
-          text: 'text-red-600',
-        };
-  }
-
-  if (tone === 'green') {
-    return isDark
-      ? {
-          soft: 'border-emerald-400/20 bg-emerald-500/10 text-emerald-200',
-          icon: 'bg-emerald-500/12 text-emerald-300',
-          strong: 'bg-emerald-400',
-          text: 'text-emerald-300',
-        }
-      : {
-          soft: 'border-emerald-200 bg-emerald-50 text-emerald-700',
-          icon: 'bg-emerald-50 text-emerald-600',
-          strong: 'bg-emerald-500',
-          text: 'text-emerald-600',
-        };
-  }
-
-  return isDark
-    ? {
-        soft: 'border-blue-400/20 bg-blue-500/10 text-blue-200',
-        icon: 'bg-blue-500/12 text-blue-300',
-        strong: 'bg-blue-400',
-        text: 'text-blue-300',
-      }
-    : {
-        soft: 'border-blue-200 bg-blue-50 text-blue-700',
-        icon: 'bg-blue-50 text-blue-600',
-        strong: 'bg-blue-500',
-        text: 'text-blue-600',
-      };
+function Card({ className, children }: { className?: string; children: React.ReactNode }) {
+  return <div className={cn('rounded-xl border bg-card text-card-foreground shadow-sm', className)}>{children}</div>;
 }
 
-function Surface({ children, className }: { children: ReactNode; className?: string }) {
-  const { theme } = useUIStore();
-  const isDark = theme === 'dark';
-
+function StatCard({ label, value, detail, primary }: { label: string; value: string; detail: string; primary?: boolean }) {
   return (
-    <div
+    <Card
       className={cn(
-        'rounded-[20px] border transition-colors duration-300',
-        isDark
-          ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.28)]'
-          : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)]',
-        className,
+        'cursor-pointer p-4 transition-all duration-500 ease-out hover:shadow-xl',
+        primary ? 'bg-primary text-primary-foreground shadow-lg' : 'bg-card text-foreground shadow-lg',
       )}
     >
-      {children}
-    </div>
-  );
-}
-
-function MutedText({ children, className }: { children: ReactNode; className?: string }) {
-  const { theme } = useUIStore();
-  return <p className={cn(theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500', className)}>{children}</p>;
-}
-
-function ProgressBar({ value, tone }: { value: number; tone: Tone }) {
-  const { theme } = useUIStore();
-  const isDark = theme === 'dark';
-  const toneClass = toneClasses(tone, isDark);
-
-  return (
-    <div className={cn('h-2.5 w-full overflow-hidden rounded-full', isDark ? 'bg-white/10' : 'bg-black/[0.08]')}>
-      <div className={cn('h-full rounded-full', toneClass.strong)} style={{ width: `${value}%` }} />
-    </div>
-  );
-}
-
-function SectionCard({ title, description, badge, icon: Icon, children }: { title: string; description?: string; badge?: string; icon: typeof Activity; children: ReactNode }) {
-  const { theme } = useUIStore();
-  const isDark = theme === 'dark';
-
-  return (
-    <Surface className="p-6">
-      <div className="flex items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <Icon className="h-4 w-4" />
-            <h3 className="text-lg font-semibold">{title}</h3>
-          </div>
-          {description ? <MutedText className="mt-1 text-sm">{description}</MutedText> : null}
+      <div className="mb-3 flex items-start justify-between">
+        <h3 className="text-xs font-medium opacity-90">{label}</h3>
+        <div className={cn('flex h-6 w-6 items-center justify-center rounded-full', primary ? 'bg-primary-foreground/20' : 'bg-primary')}>
+          <ArrowUpRight className={cn('h-3 w-3', primary ? 'text-primary-foreground' : 'text-primary-foreground')} />
         </div>
-        {badge ? (
-          <div
-            className={cn(
-              'rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-wide',
-              isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
-            )}
-          >
-            {badge}
-          </div>
-        ) : null}
       </div>
-      <div className="mt-6">{children}</div>
-    </Surface>
+      <p className="mb-2 text-3xl font-bold">{value}</p>
+      <div className="flex items-center gap-1.5 text-xs opacity-80">
+        {detail.includes('Increased') ? <TrendingUp className="h-3 w-3" /> : null}
+        <span>{detail}</span>
+      </div>
+    </Card>
   );
+}
+
+function TeamStatusPill({ tone, text }: { tone: 'emerald' | 'amber' | 'rose'; text: string }) {
+  const map = {
+    emerald: 'bg-emerald-100 text-emerald-700',
+    amber: 'bg-amber-100 text-amber-700',
+    rose: 'bg-rose-100 text-rose-700',
+  };
+
+  return <span className={cn('whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium', map[tone])}>{text}</span>;
 }
 
 export default function App() {
@@ -171,145 +82,211 @@ export default function App() {
 
   return (
     <AppShell>
-      <div className="space-y-6">
-        <Surface className="overflow-hidden p-6 lg:p-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <div className={cn('inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm', isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700')}>
-                <Activity className="h-4 w-4" />
-                Dashboard overview
-              </div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight lg:text-4xl">Control center for client execution</h2>
-              <MutedText className="mt-3 max-w-2xl text-sm leading-6">
-                Track active clients, project momentum, delegated work, and decisions that need your attention from one place.
-              </MutedText>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className={cn('rounded-xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
-                <div className="text-xs uppercase tracking-wide text-zinc-500">Today</div>
-                <div className="mt-2 flex items-center gap-2 text-sm font-medium">
-                  <CalendarRange className={cn('h-4 w-4', toneClasses('blue', isDark).text)} />
-                  Monday · 4 key reviews
+      <div>
+        <h1 className="mb-1 text-xl font-bold text-foreground md:text-2xl lg:text-3xl">Dashboard</h1>
+        <p className="text-xs text-muted-foreground md:text-sm">Plan, prioritize, and accomplish your tasks with ease.</p>
+      </div>
+
+      <div className="flex flex-col gap-2 sm:flex-row">
+        <button className="h-9 w-full rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 sm:w-auto">
+          + Add Project
+        </button>
+        <button className="h-9 w-full rounded-md border border-border bg-transparent px-4 text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-md sm:w-auto">
+          Import Data
+        </button>
+      </div>
+
+      <div className="mt-4 space-y-3 md:mt-5 md:space-y-4">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat) => (
+            <StatCard key={stat.label} {...stat} />
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 gap-3 md:gap-4 lg:grid-cols-3">
+          <div className="space-y-3 md:space-y-4 lg:col-span-2">
+            <Card className="bg-gradient-to-br from-background to-muted/20 p-6 transition-all duration-500 hover:shadow-xl">
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="text-xl font-semibold text-foreground">Project Analytics</h2>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <div className="h-2 w-2 rounded-full bg-emerald-600" />
+                  <span>Weekly Activity</span>
                 </div>
               </div>
-              <div className={cn('rounded-xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
-                <div className="text-xs uppercase tracking-wide text-zinc-500">Execution</div>
-                <div className="mt-2 flex items-center gap-2 text-sm font-medium">
-                  <Clock3 className={cn('h-4 w-4', toneClasses('green', isDark).text)} />
-                  11 tasks waiting for action
+
+              <div className="relative mb-4 h-64 overflow-hidden rounded-xl border border-border/60 bg-gradient-to-b from-background to-muted/30 p-4">
+                <div className="absolute inset-x-0 bottom-0 top-0 flex items-end gap-3 px-6 pb-6">
+                  {[42, 55, 39, 66, 58, 78, 69, 88, 73, 92].map((height, index) => (
+                    <div key={index} className="flex flex-1 items-end justify-center">
+                      <div className="w-full rounded-t-full bg-primary/80" style={{ height: `${height}%` }} />
+                    </div>
+                  ))}
+                </div>
+                <div className="absolute inset-0 bg-[linear-gradient(to_top,transparent_0%,transparent_70%,rgba(255,255,255,0.02)_100%)]" />
+              </div>
+
+              <div className="flex items-center justify-between border-t border-muted/50 pt-4 text-sm">
+                <div>
+                  <span className="text-muted-foreground">Average: </span>
+                  <span className="font-semibold text-foreground">62%</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Peak: </span>
+                  <span className="font-semibold text-emerald-600">92%</span>
                 </div>
               </div>
-            </div>
+            </Card>
+
+            <Card className="p-6 transition-all duration-500 hover:shadow-xl">
+              <div className="mb-6 flex items-center justify-between">
+                <h2 className="text-xl font-semibold text-foreground">Team Collaboration</h2>
+                <button className="inline-flex h-8 items-center rounded-md border border-border bg-transparent px-3 text-sm transition-all duration-300 hover:scale-105">
+                  <Plus className="mr-1 h-4 w-4" />
+                  Add Member
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {teamMembers.map((member) => (
+                  <div key={member.name} className="group flex cursor-pointer items-center gap-4 rounded-lg p-3 transition-all duration-300 hover:bg-secondary">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-sm text-primary-foreground ring-2 ring-primary/20 transition-all duration-300 group-hover:scale-110 group-hover:ring-primary/40">
+                      {member.initials}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-semibold text-foreground">{member.name}</p>
+                      <p className="truncate text-xs text-muted-foreground">
+                        Working on <span className="font-medium">{member.task}</span>
+                      </p>
+                    </div>
+                    <TeamStatusPill tone={member.tone} text={member.status} />
+                  </div>
+                ))}
+              </div>
+            </Card>
           </div>
-        </Surface>
 
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {stats.map(({ label, value, change, icon: Icon, tone }) => {
-            const toneClass = toneClasses(tone, isDark);
-            return (
-              <Surface key={label} className="p-5">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <MutedText className="text-sm">{label}</MutedText>
-                    <p className="mt-3 text-3xl font-semibold tracking-tight">{value}</p>
-                  </div>
-                  <div className={cn('rounded-full p-2.5', toneClass.icon)}>
-                    <Icon className="h-5 w-5" />
+          <div className="space-y-3 md:space-y-4">
+            <Card className="p-6 transition-all duration-500 hover:shadow-xl">
+              <h2 className="mb-6 text-xl font-semibold text-foreground">Reminders</h2>
+              <div className="space-y-4">
+                <div className="rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
+                  <h3 className="mb-1 font-semibold text-foreground">Meeting with Arc Company</h3>
+                  <p className="mb-4 text-sm text-muted-foreground">Time : 02.00 pm - 04.00 pm</p>
+                  <button className="inline-flex h-9 w-full items-center justify-center rounded-md bg-primary text-sm font-medium text-primary-foreground transition-all duration-300 hover:shadow-lg hover:shadow-primary/30">
+                    <Video className="mr-2 h-4 w-4" />
+                    Start Meeting
+                  </button>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="overflow-hidden p-4 transition-all duration-500 hover:shadow-xl">
+              <h2 className="mb-4 text-lg font-semibold text-foreground">Project Progress</h2>
+              <div className="flex flex-col items-center">
+                <div className="relative mb-4 h-40 w-40">
+                  <div className="absolute inset-0 rounded-full opacity-20 [background:repeating-linear-gradient(45deg,transparent,transparent_6px,oklch(0.42_0.15_155)_6px,oklch(0.42_0.15_155)_12px)]" />
+                  <div className="absolute inset-3 rounded-full border-[12px] border-muted/30" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <span className="text-4xl font-bold text-foreground">0%</span>
+                    <span className="mt-1 text-xs text-muted-foreground">Project Ended</span>
                   </div>
                 </div>
-                <MutedText className="mt-4 inline-flex items-center gap-1 text-sm">
-                  <ArrowUpRight className={toneClass.text} />
-                  {change}
-                </MutedText>
-              </Surface>
-            );
-          })}
-        </section>
-
-        <section className="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
-          <SectionCard title="Priority projects" description="Projects that need active steering this week." badge="3 in focus" icon={TrendingUp}>
-            <div className="space-y-4">
-              {focusProjects.map((item) => {
-                const toneClass = toneClasses(item.tone, isDark);
-                return (
-                  <div key={item.project} className={cn('rounded-xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
-                    <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-                      <div>
-                        <div className="text-xs uppercase tracking-wide text-zinc-500">{item.client}</div>
-                        <div className="mt-1 text-base font-medium">{item.project}</div>
-                        <MutedText className="mt-2 flex flex-wrap items-center gap-2 text-sm">
-                          <span className={toneClass.text}>{item.stage}</span>
-                          <span className={isDark ? 'text-zinc-600' : 'text-zinc-400'}>•</span>
-                          <span>{item.owner}</span>
-                        </MutedText>
-                      </div>
-                      <div className="min-w-44">
-                        <div className="mb-2 flex items-center justify-between text-sm">
-                          <MutedText>Progress</MutedText>
-                          <span className={cn('rounded-full border px-2 py-0.5 text-xs', toneClass.soft)}>{item.progress}%</span>
-                        </div>
-                        <ProgressBar value={item.progress} tone={item.tone} />
-                      </div>
-                    </div>
+                <div className="flex flex-wrap justify-center gap-3 text-xs">
+                  <div className="flex items-center gap-1.5">
+                    <div className="h-2.5 w-2.5 rounded-full bg-primary" />
+                    <span className="text-muted-foreground">Completed</span>
                   </div>
-                );
-              })}
-            </div>
-          </SectionCard>
-
-          <SectionCard title="Today queue" icon={ListTodo}>
-            <div className="space-y-4">
-              {todayQueue.map((item) => {
-                const toneClass = toneClasses(item.tone, isDark);
-                return (
-                  <div key={item.title} className={cn('rounded-xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="text-sm font-medium">{item.title}</div>
-                        <MutedText className="mt-1 text-sm">{item.detail}</MutedText>
-                      </div>
-                      <span className={cn('rounded-full border px-2.5 py-1 text-xs font-medium', toneClass.soft)}>{item.priority}</span>
-                    </div>
-                    <div className="mt-3 text-xs uppercase tracking-wide text-zinc-500">{item.time}</div>
+                  <div className="flex items-center gap-1.5">
+                    <div className="h-2.5 w-2.5 rounded-full bg-foreground" />
+                    <span className="text-muted-foreground">In Progress</span>
                   </div>
-                );
-              })}
-            </div>
-          </SectionCard>
-        </section>
-
-        <section className="grid gap-6 xl:grid-cols-[1fr_1fr]">
-          <SectionCard title="Agent load" icon={Users}>
-            <div className="space-y-4">
-              {teamLoad.map((item) => {
-                const toneClass = toneClasses(item.tone, isDark);
-                return (
-                  <div key={item.name} className={cn('flex items-center justify-between rounded-xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
-                    <div>
-                      <div className="text-sm font-medium">{item.name}</div>
-                      <MutedText className="mt-1 text-sm">{item.tasks} active tasks</MutedText>
-                    </div>
-                    <span className={cn('rounded-full border px-3 py-1 text-xs font-medium', toneClass.soft)}>{item.load}</span>
+                  <div className="flex items-center gap-1.5">
+                    <div className="h-2.5 w-2.5 rounded-full [background:repeating-linear-gradient(45deg,transparent,transparent_2px,oklch(0.55_0.02_120)_2px,oklch(0.55_0.02_120)_4px)]" />
+                    <span className="text-muted-foreground">Pending</span>
                   </div>
-                );
-              })}
-            </div>
-          </SectionCard>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
 
-          <SectionCard title="Recent activity" icon={Activity}>
-            <div className="space-y-4">
-              {activityFeed.map((item) => {
-                const toneClass = toneClasses(item.tone, isDark);
-                return (
-                  <div key={item.text} className={cn('flex gap-3 rounded-xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
-                    <div className={cn('mt-1 h-2.5 w-2.5 rounded-full', toneClass.strong)} />
-                    <p className={cn('text-sm leading-6', isDark ? 'text-zinc-300' : 'text-zinc-700')}>{item.text}</p>
-                  </div>
-                );
-              })}
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
+          <Card className="p-6 transition-all duration-500 hover:shadow-xl">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Project</h2>
+              <button className="inline-flex h-8 items-center rounded-md border border-border bg-transparent px-3 text-sm transition-all duration-300 hover:scale-105">
+                <Plus className="mr-1 h-4 w-4" />
+                New
+              </button>
             </div>
-          </SectionCard>
-        </section>
+
+            <div className="space-y-3">
+              {projects.map((project) => (
+                <div key={project.title} className="group flex cursor-pointer items-center gap-3 rounded-lg p-3 transition-all duration-300 hover:bg-secondary">
+                  <div className={cn('flex h-10 w-10 items-center justify-center rounded-lg text-xl transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110', project.color)}>
+                    {project.emoji}
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-foreground">{project.title}</p>
+                    <p className="text-xs text-muted-foreground">Due date: {project.due}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:shadow-2xl">
+            <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
+              <svg className="absolute bottom-0 h-[100px] w-full" viewBox="0 0 200 60" preserveAspectRatio="none">
+                <path d="M0,30 Q25,15 50,30 T100,30 T150,30 T200,30 L200,60 L0,60 Z" fill="oklch(0.42 0.15 155)" opacity="0.3" />
+                <path d="M0,40 Q25,25 50,40 T100,40 T150,40 T200,40 L200,60 L0,60 Z" fill="oklch(0.42 0.15 155)" />
+              </svg>
+            </div>
+            <div className="relative z-10">
+              <Smartphone className="mb-3 h-6 w-6" />
+              <h2 className="mb-1 text-xl font-bold">Download our Mobile App</h2>
+              <p className="mb-4 text-xs opacity-80">Get easy in another way</p>
+              <div className="mb-4 flex flex-col gap-2">
+                <button className="flex h-10 items-center justify-start gap-2 rounded-md bg-background px-3 text-left text-foreground transition-all duration-300 hover:scale-105 hover:bg-background/90">
+                  <Smartphone className="h-5 w-5" />
+                  <div className="flex flex-col items-start">
+                    <span className="text-[10px] leading-none">Download on the</span>
+                    <span className="text-sm font-semibold leading-none">App Store</span>
+                  </div>
+                </button>
+                <button className="flex h-10 items-center justify-start gap-2 rounded-md bg-background px-3 text-left text-foreground transition-all duration-300 hover:scale-105 hover:bg-background/90">
+                  <MonitorSmartphone className="h-5 w-5" />
+                  <div className="flex flex-col items-start">
+                    <span className="text-[10px] leading-none">Get it on</span>
+                    <span className="text-sm font-semibold leading-none">Google Play</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </Card>
+
+          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:shadow-2xl">
+            <div className="absolute right-0 top-0 h-full w-48 opacity-15">
+              {[0, 50, 100, 150, 200, 250].map((top, index) => (
+                <svg key={index} className="absolute" style={{ top, right: -index * 10, width: 150, height: 80 }} viewBox="0 0 100 50" preserveAspectRatio="none">
+                  <path d="M0,25 Q12.5,10 25,25 T50,25 T75,25 T100,25" fill="none" stroke="oklch(0.42 0.15 155)" strokeWidth="2" />
+                </svg>
+              ))}
+            </div>
+            <div className="relative z-10">
+              <h2 className="mb-4 text-lg font-semibold">Time Tracker</h2>
+              <div className="mb-4 break-all font-mono text-4xl font-bold tracking-tight sm:text-5xl">24:00:08</div>
+              <div className="flex gap-3">
+                <button className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground transition-all duration-300 hover:scale-110 hover:bg-background/90">
+                  <Pause className="h-4 w-4" />
+                </button>
+                <button className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-destructive text-primary-foreground transition-all duration-300 hover:scale-110 hover:bg-destructive/90">
+                  <Square className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </Card>
+        </div>
       </div>
     </AppShell>
   );

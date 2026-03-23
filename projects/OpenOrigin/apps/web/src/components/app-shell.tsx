@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import { Bell, BriefcaseBusiness, FolderKanban, Mail, Menu, Moon, Search, SunMedium, Users } from 'lucide-react';
-import { useUIStore } from '@/store/ui-store';
+import { Bell, Calendar, ChartColumn, LayoutDashboard, LogOut, Mail, Menu, Search, Settings, SquareCheckBig, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useUIStore } from '@/store/ui-store';
 
 type AppShellProps = {
   children: ReactNode;
@@ -9,178 +9,138 @@ type AppShellProps = {
 
 type NavigationItem = {
   label: string;
-  icon: typeof BriefcaseBusiness;
+  icon: typeof LayoutDashboard;
+  section: 'menu' | 'general';
+  badge?: string;
   active?: boolean;
 };
 
 const navigation: NavigationItem[] = [
-  { label: 'Dashboard', icon: BriefcaseBusiness, active: true },
-  { label: 'Clients', icon: Users },
-  { label: 'Projects', icon: FolderKanban },
+  { label: 'Dashboard', icon: LayoutDashboard, section: 'menu', active: true },
+  { label: 'Tasks', icon: SquareCheckBig, section: 'menu', badge: '124' },
+  { label: 'Calendar', icon: Calendar, section: 'menu' },
+  { label: 'Analytics', icon: ChartColumn, section: 'menu' },
+  { label: 'Team', icon: Users, section: 'menu' },
+  { label: 'Settings', icon: Settings, section: 'general' },
+  { label: 'Help', icon: Bell, section: 'general' },
+  { label: 'Logout', icon: LogOut, section: 'general' },
 ];
 
-const brandLogo = (
-  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-emerald-400 text-xs font-semibold text-white shadow-[0_8px_24px_rgba(59,130,246,0.28)]">
-    OO
-  </div>
-);
+function BrandMark() {
+  return (
+    <div className="relative flex h-8 w-8 items-center justify-center rounded-full bg-primary transition-transform duration-300 group-hover:scale-110">
+      <div className="absolute left-[30%] top-[30%] h-1.5 w-1.5 rounded-full bg-primary-foreground" />
+      <div className="absolute right-[30%] top-[30%] h-1.5 w-1.5 rounded-full bg-primary-foreground" />
+      <div className="absolute bottom-2.5 h-1.5 w-3 rounded-full border-b-2 border-primary-foreground" />
+    </div>
+  );
+}
 
-export function AppShell({ children }: AppShellProps) {
-  const { sidebarOpen, setSidebarOpen, theme, toggleTheme } = useUIStore();
+function NavGroup({ title, items }: { title: string; items: NavigationItem[] }) {
+  const { theme } = useUIStore();
   const isDark = theme === 'dark';
 
   return (
-    <div
-      className={cn(
-        'h-screen overflow-hidden transition-colors duration-300',
-        isDark ? 'bg-[#0a0a0b] text-zinc-100' : 'bg-[#f5f5f7] text-zinc-900',
-      )}
-    >
-      <div className="flex h-full flex-col p-4">
-        <header
-          className={cn(
-            'sticky top-4 z-20 flex min-h-16 shrink-0 items-center justify-between gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:px-6 lg:py-3',
-            isDark
-              ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
-              : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
-          )}
-        >
-          <div className="flex min-w-0 items-center gap-3 lg:hidden">
-            {brandLogo}
-            <div className="min-w-0">
-              <div className="truncate text-sm font-semibold">OpenOrigin</div>
-            </div>
-          </div>
-
-          <div className={cn('hidden min-w-0 items-center lg:flex', sidebarOpen ? 'w-72 justify-between' : 'w-auto gap-3')}>
-            <div className="flex min-w-0 items-center gap-3">
-              {brandLogo}
-              <div className="font-semibold tracking-tight">OpenOrigin</div>
-            </div>
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
-              )}
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              aria-label="Toggle menu"
-            >
-              <Menu className="h-3.5 w-3.5" />
-            </button>
-          </div>
-
-          <div
+    <div>
+      <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
+      <nav className="space-y-0.5">
+        {items.map(({ label, icon: Icon, badge, active }) => (
+          <button
+            key={label}
             className={cn(
-              'hidden h-10 min-w-0 flex-1 items-center gap-2 rounded-xl border px-3 lg:flex lg:mx-6 lg:max-w-[32%]',
-              isDark ? 'border-white/10 bg-white/[0.04] text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-600',
+              'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm font-medium transition-all duration-300',
+              active
+                ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
+                : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
             )}
           >
-            <Search className="h-3.5 w-3.5" />
-            <input
-              type="text"
-              placeholder="Search clients, projects, tasks"
-              className={cn(
-                'w-full bg-transparent text-xs outline-none placeholder:text-inherit',
-                isDark ? 'text-zinc-100' : 'text-zinc-900',
-              )}
-            />
+            <Icon className="h-4 w-4" />
+            <span className="text-sm">{label}</span>
+            {badge ? (
+              <span
+                className={cn(
+                  'ml-auto rounded-full px-1.5 py-0.5 text-[10px] font-semibold',
+                  isDark ? 'bg-primary text-primary-foreground' : 'bg-primary text-primary-foreground',
+                )}
+              >
+                {badge}
+              </span>
+            ) : null}
+          </button>
+        ))}
+      </nav>
+    </div>
+  );
+}
+
+export function AppShell({ children }: AppShellProps) {
+  const { sidebarOpen, setSidebarOpen, theme } = useUIStore();
+  const menuItems = navigation.filter((item) => item.section === 'menu');
+  const generalItems = navigation.filter((item) => item.section === 'general');
+
+  return (
+    <div className="flex min-h-screen bg-background text-foreground">
+      {sidebarOpen ? (
+        <aside className="hidden h-screen w-64 shrink-0 overflow-y-auto border-r border-border bg-card p-4 lg:fixed lg:left-0 lg:top-0 lg:block">
+          <div className="group mb-6 flex cursor-pointer items-center gap-2">
+            <a className="flex items-center gap-2" href="#">
+              <BrandMark />
+              <span className="text-lg font-semibold text-foreground">Tasko</span>
+            </a>
           </div>
 
-          <div className="flex items-center justify-end gap-2 lg:hidden">
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-              )}
-              aria-label="Search"
-            >
-              <Search className="h-3.5 w-3.5" />
-            </button>
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-              )}
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-              aria-label="Menu"
-            >
-              <Menu className="h-3.5 w-3.5" />
-            </button>
+          <div className="space-y-4">
+            <NavGroup title="Menu" items={menuItems} />
+            <NavGroup title="General" items={generalItems} />
+          </div>
+        </aside>
+      ) : null}
+
+      <main className={cn('flex-1 p-3 md:p-4 lg:p-5', sidebarOpen ? 'lg:ml-64' : '')}>
+        <header className="animate-in fade-in-0 slide-in-from-bottom-2 space-y-3 md:space-y-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-1 items-center gap-2">
+              <button
+                className="inline-flex size-9 items-center justify-center rounded-md transition-all duration-300 hover:bg-secondary lg:hidden"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                aria-label="Open menu"
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+
+              <div className="relative max-w-md flex-1">
+                <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  placeholder="Search task"
+                  className="h-9 w-full rounded-md border border-border bg-card pl-9 pr-3 text-sm shadow-xs outline-none transition-all duration-300 placeholder:text-muted-foreground focus:border-ring focus:shadow-lg focus:shadow-primary/10"
+                />
+                <kbd className="absolute right-2.5 top-1/2 hidden -translate-y-1/2 rounded border border-border bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground md:inline-block">
+                  ⌘F
+                </kbd>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-1.5 md:gap-2">
+              <button className="relative inline-flex h-8 w-8 items-center justify-center rounded-md transition-all duration-300 hover:scale-110 hover:bg-secondary">
+                <Mail className="h-4 w-4" />
+              </button>
+              <button className="relative inline-flex h-8 w-8 items-center justify-center rounded-md transition-all duration-300 hover:scale-110 hover:bg-secondary">
+                <Bell className="h-4 w-4" />
+                <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-destructive" />
+              </button>
+              <div className="flex items-center gap-2 border-l border-border pl-2 md:pl-3">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-xs ring-2 ring-primary/20 md:h-8 md:w-8">JS</div>
+                <div className="hidden text-xs sm:block">
+                  <p className="font-semibold text-foreground">Jessin Sam</p>
+                  <p className="text-[10px] text-muted-foreground">jessin@gmail.com</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="hidden items-center justify-end gap-2 lg:flex">
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-              )}
-              aria-label="Mail"
-            >
-              <Mail className="h-3.5 w-3.5" />
-            </button>
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-              )}
-              aria-label="Notifications"
-            >
-              <Bell className="h-3.5 w-3.5" />
-            </button>
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-              )}
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-            >
-              {isDark ? <SunMedium className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-            </button>
-            <button
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-              )}
-              aria-label="User profile"
-            >
-              <Users className="h-3.5 w-3.5" />
-            </button>
-          </div>
+          {children}
         </header>
-
-        <div className="min-h-0 flex-1 pt-4 md:flex md:gap-6">
-          <aside
-            className={cn(
-              'hidden shrink-0 rounded-[28px] border transition-all duration-300',
-              sidebarOpen ? 'md:block md:w-72' : 'md:hidden',
-              isDark
-                ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
-                : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]',
-            )}
-          >
-            <nav className="space-y-2 px-3 py-4">
-              {navigation.map(({ label, icon: Icon, active }) => (
-                <button
-                  key={label}
-                  className={cn(
-                    'flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
-                    active && isDark && 'bg-white text-black',
-                    active && !isDark && 'bg-black text-white',
-                    !active && isDark && 'text-zinc-300 hover:bg-white/5 hover:text-white',
-                    !active && !isDark && 'text-zinc-700 hover:bg-black/[0.04] hover:text-black',
-                  )}
-                >
-                  <Icon className="h-3.5 w-3.5" />
-                  <span>{label}</span>
-                </button>
-              ))}
-            </nav>
-          </aside>
-
-          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto pt-2 md:pt-0">{children}</main>
-        </div>
-      </div>
+      </main>
     </div>
   );
 }
