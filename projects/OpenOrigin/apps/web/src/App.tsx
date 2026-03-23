@@ -213,7 +213,7 @@ export default function App() {
                     <MutedText className="text-sm">{label}</MutedText>
                     <p className="mt-3 text-3xl font-semibold tracking-tight">{value}</p>
                   </div>
-                  <div className={cn('rounded-xl p-2.5', toneClass.icon)}>
+                  <div className={cn('rounded-full p-2.5', toneClass.icon)}>
                     <Icon className="h-5 w-5" />
                   </div>
                 </div>

@@ -45,7 +45,7 @@ export function AppShell({ children }: AppShellProps) {
           <div className={cn('font-semibold tracking-tight', !sidebarOpen && 'hidden')}>OpenOrigin</div>
           <button
             className={cn(
-              'hidden h-9 w-9 items-center justify-center rounded-xl border transition-colors md:inline-flex',
+              'hidden h-9 w-9 items-center justify-center rounded-full border transition-colors md:inline-flex',
               isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
             )}
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -102,7 +102,7 @@ export function AppShell({ children }: AppShellProps) {
           <div className="flex items-center justify-end gap-2">
             <button
               className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               aria-label="Mail"
@@ -111,7 +111,7 @@ export function AppShell({ children }: AppShellProps) {
             </button>
             <button
               className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               aria-label="Notifications"
@@ -120,7 +120,7 @@ export function AppShell({ children }: AppShellProps) {
             </button>
             <button
               className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               onClick={toggleTheme}
