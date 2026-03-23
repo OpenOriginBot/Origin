@@ -33,18 +33,18 @@ function StatCard({ label, value, detail, primary }: { label: string; value: str
   return (
     <Card
       className={cn(
-        'cursor-pointer p-4 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.05] hover:shadow-2xl',
+        'cursor-pointer p-3.5 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.05] hover:shadow-2xl md:p-4',
         primary ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30' : 'bg-card text-foreground shadow-lg',
       )}
     >
-      <div className="mb-3 flex items-start justify-between">
-        <h3 className="text-xs font-medium opacity-90">{label}</h3>
+      <div className="mb-2.5 flex items-start justify-between">
+        <h3 className="text-[11px] font-medium opacity-90">{label}</h3>
         <div className={cn('flex h-6 w-6 items-center justify-center rounded-full', primary ? 'bg-primary-foreground/20' : 'bg-primary')}>
           <ArrowUpRight className={cn('h-3 w-3', primary ? 'text-primary-foreground' : 'text-primary-foreground')} />
         </div>
       </div>
-      <p className="mb-2 text-3xl font-bold">{value}</p>
-      <div className="flex items-center gap-1.5 text-xs opacity-80">
+      <p className="mb-2 text-3xl font-bold leading-none">{value}</p>
+      <div className="flex items-center gap-1.5 text-[11px] opacity-80">
         {detail.includes('Increased') ? <TrendingUp className="h-3 w-3" /> : null}
         <span>{detail}</span>
       </div>
