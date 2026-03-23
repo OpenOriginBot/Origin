@@ -59,7 +59,7 @@ export function AppShell({ children }: AppShellProps) {
             <button
               key={label}
               className={cn(
-                'flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left text-sm transition-colors',
+                'flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
                 active && isDark && 'bg-white text-black',
                 active && !isDark && 'bg-black text-white',
                 !active && isDark && 'text-zinc-300 hover:bg-white/5 hover:text-white',
@@ -104,3 +104,4 @@ export function AppShell({ children }: AppShellProps) {
     </div>
   );
 }
+

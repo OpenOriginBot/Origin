@@ -106,7 +106,7 @@ function Surface({ children, className }: { children: ReactNode; className?: str
   return (
     <div
       className={cn(
-        'rounded-[28px] border transition-colors duration-300',
+        'rounded-[20px] border transition-colors duration-300',
         isDark
           ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.28)]'
           : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.06)]',
@@ -185,14 +185,14 @@ export default function App() {
               </MutedText>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className={cn('rounded-2xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
+              <div className={cn('rounded-xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
                 <div className="text-xs uppercase tracking-wide text-zinc-500">Today</div>
                 <div className="mt-2 flex items-center gap-2 text-sm font-medium">
                   <CalendarRange className={cn('h-4 w-4', toneClasses('blue', isDark).text)} />
                   Monday · 4 key reviews
                 </div>
               </div>
-              <div className={cn('rounded-2xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
+              <div className={cn('rounded-xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
                 <div className="text-xs uppercase tracking-wide text-zinc-500">Execution</div>
                 <div className="mt-2 flex items-center gap-2 text-sm font-medium">
                   <Clock3 className={cn('h-4 w-4', toneClasses('green', isDark).text)} />
@@ -213,7 +213,7 @@ export default function App() {
                     <MutedText className="text-sm">{label}</MutedText>
                     <p className="mt-3 text-3xl font-semibold tracking-tight">{value}</p>
                   </div>
-                  <div className={cn('rounded-2xl p-2.5', toneClass.icon)}>
+                  <div className={cn('rounded-xl p-2.5', toneClass.icon)}>
                     <Icon className="h-5 w-5" />
                   </div>
                 </div>
@@ -232,7 +232,7 @@ export default function App() {
               {focusProjects.map((item) => {
                 const toneClass = toneClasses(item.tone, isDark);
                 return (
-                  <div key={item.project} className={cn('rounded-2xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
+                  <div key={item.project} className={cn('rounded-xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
                     <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
                       <div>
                         <div className="text-xs uppercase tracking-wide text-zinc-500">{item.client}</div>
@@ -262,7 +262,7 @@ export default function App() {
               {todayQueue.map((item) => {
                 const toneClass = toneClasses(item.tone, isDark);
                 return (
-                  <div key={item.title} className={cn('rounded-2xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
+                  <div key={item.title} className={cn('rounded-xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
                     <div className="flex items-start justify-between gap-3">
                       <div>
                         <div className="text-sm font-medium">{item.title}</div>
@@ -284,7 +284,7 @@ export default function App() {
               {teamLoad.map((item) => {
                 const toneClass = toneClasses(item.tone, isDark);
                 return (
-                  <div key={item.name} className={cn('flex items-center justify-between rounded-2xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
+                  <div key={item.name} className={cn('flex items-center justify-between rounded-xl border px-4 py-3', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
                     <div>
                       <div className="text-sm font-medium">{item.name}</div>
                       <MutedText className="mt-1 text-sm">{item.tasks} active tasks</MutedText>
@@ -301,7 +301,7 @@ export default function App() {
               {activityFeed.map((item) => {
                 const toneClass = toneClasses(item.tone, isDark);
                 return (
-                  <div key={item.text} className={cn('flex gap-3 rounded-2xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
+                  <div key={item.text} className={cn('flex gap-3 rounded-xl border p-4', isDark ? 'border-white/10 bg-white/[0.03]' : 'border-black/10 bg-black/[0.02]')}>
                     <div className={cn('mt-1 h-2.5 w-2.5 rounded-full', toneClass.strong)} />
                     <p className={cn('text-sm leading-6', isDark ? 'text-zinc-300' : 'text-zinc-700')}>{item.text}</p>
                   </div>
