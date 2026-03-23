@@ -52,9 +52,11 @@ export function AppShell({ children }: AppShellProps) {
             </div>
           </div>
 
-          <div className="hidden min-w-0 items-center gap-3 lg:flex">
-            {brandLogo}
-            <div className="font-semibold tracking-tight">OpenOrigin</div>
+          <div className={cn('hidden min-w-0 items-center lg:flex', sidebarOpen ? 'w-72 justify-between' : 'w-auto gap-3')}>
+            <div className="flex min-w-0 items-center gap-3">
+              {brandLogo}
+              <div className="font-semibold tracking-tight">OpenOrigin</div>
+            </div>
             <button
               className={cn(
                 'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
