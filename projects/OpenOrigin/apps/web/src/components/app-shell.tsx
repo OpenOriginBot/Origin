@@ -52,9 +52,24 @@ export function AppShell({ children }: AppShellProps) {
             </div>
           </div>
 
+          <div className="hidden min-w-0 items-center gap-3 lg:flex">
+            {brandLogo}
+            <div className="font-semibold tracking-tight">OpenOrigin</div>
+            <button
+              className={cn(
+                'inline-flex h-9 w-9 items-center justify-center rounded-full border transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
+              )}
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              aria-label="Toggle menu"
+            >
+              <Menu className="h-3.5 w-3.5" />
+            </button>
+          </div>
+
           <div
             className={cn(
-              'hidden h-10 min-w-0 flex-1 items-center gap-2 rounded-xl border px-3 lg:flex lg:max-w-[32%]',
+              'hidden h-10 min-w-0 flex-1 items-center gap-2 rounded-xl border px-3 lg:flex lg:mx-6 lg:max-w-[32%]',
               isDark ? 'border-white/10 bg-white/[0.04] text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-600',
             )}
           >
@@ -142,22 +157,6 @@ export function AppShell({ children }: AppShellProps) {
                 : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]',
             )}
           >
-            <div className="flex h-16 items-center justify-between px-4">
-              <div className="flex items-center gap-3">
-                {brandLogo}
-                <div className="font-semibold tracking-tight">OpenOrigin</div>
-              </div>
-              <button
-                className={cn(
-                  'hidden h-9 w-9 items-center justify-center rounded-full border transition-colors md:inline-flex',
-                  isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
-                )}
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-              >
-                <Menu className="h-3.5 w-3.5" />
-              </button>
-            </div>
-
             <nav className="space-y-2 px-3 py-4">
               {navigation.map(({ label, icon: Icon, active }) => (
                 <button
