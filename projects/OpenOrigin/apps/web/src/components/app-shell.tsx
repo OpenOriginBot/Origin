@@ -42,7 +42,7 @@ function NavGroup({ title, items }: { title: string; items: NavigationItem[] }) 
 
   return (
     <div>
-      <p className="mb-2 text-[10px] font-medium uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
+      <p className="mb-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{title}</p>
       <nav className="space-y-0.5">
         {items.map(({ label, icon: Icon, badge, active }) => (
           <button
@@ -108,11 +108,11 @@ export function AppShell({ children }: AppShellProps) {
                 <Menu className="h-6 w-6" />
               </button>
 
-              <div className="relative max-w-md flex-1">
+              <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <input
                   placeholder="Search task"
-                  className="h-9 w-full rounded-md border border-border bg-card pl-9 pr-3 text-sm shadow-xs outline-none transition-all duration-300 placeholder:text-muted-foreground focus:border-ring focus:shadow-lg focus:shadow-primary/10"
+                  className="h-9 w-full rounded-md border border-border bg-card pl-9 pr-3 md:pr-16 text-sm shadow-xs outline-none transition-all duration-300 placeholder:text-muted-foreground focus:border-ring focus:shadow-lg focus:shadow-primary/10"
                 />
                 <kbd className="absolute right-2.5 top-1/2 hidden -translate-y-1/2 rounded border border-border bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground md:inline-block">
                   ⌘F
