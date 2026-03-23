@@ -26,7 +26,7 @@ const projects = [
 ] as const;
 
 function Card({ className, children }: { className?: string; children: React.ReactNode }) {
-  return <div className={cn('rounded-xl border bg-card text-card-foreground shadow-sm', className)}>{children}</div>;
+  return <div className={cn('rounded-xl border bg-card text-card-foreground shadow-sm transition-all duration-500 hover:shadow-xl', className)}>{children}</div>;
 }
 
 function StatCard({ label, value, detail, primary }: { label: string; value: string; detail: string; primary?: boolean }) {

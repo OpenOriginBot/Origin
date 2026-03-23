@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Bell, Calendar, ChartColumn, LayoutDashboard, LogOut, Mail, Menu, Search, Settings, SquareCheckBig, Users } from 'lucide-react';
+import { Bell, Calendar, ChartColumn, CircleHelp, LayoutDashboard, LogOut, Mail, Menu, Search, Settings, SquareCheckBig, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/store/ui-store';
 
