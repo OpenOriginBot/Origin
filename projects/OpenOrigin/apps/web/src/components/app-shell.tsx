@@ -147,7 +147,7 @@ export function AppShell({ children }: AppShellProps) {
           </div>
         </header>
 
-        <div className="min-h-0 flex-1 pt-4 md:flex md:items-start md:gap-6">
+        <div className="min-h-0 flex-1 pt-4 md:flex md:gap-6">
           <aside
             className={cn(
               'hidden shrink-0 rounded-[28px] border transition-all duration-300',
