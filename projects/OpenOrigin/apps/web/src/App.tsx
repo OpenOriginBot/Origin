@@ -1,8 +1,14 @@
+import { useQuery } from '@tanstack/react-query';
 import type { LucideIcon } from 'lucide-react';
 import { ArrowUpRight, CalendarDays, ChevronLeft, ChevronRight, Clock, Code2, Layers3, MoreHorizontal, Plus, Square, TrendingUp, UserRound, Video, Zap } from 'lucide-react';
 import { AppShell } from '@/components/app-shell';
 import { cn } from '@/lib/utils';
+import { fetchApi, API_BASE_URL } from '@/services/api';
 import { useUIStore } from '@/store/ui-store';
+
+type Client = { id: number; name: string; status: string };
+type Project = { id: number; client_id: number; name: string; status: string };
+type HealthResponse = { status: string; service: string };
 
 const stats = [
   { label: 'Total Projects', value: '24', detail: 'Increased from last month', primary: true },
@@ -115,8 +121,27 @@ function ProjectIcon({ icon: Icon, color }: { icon: LucideIcon; color: string })
 }
 
 function DashboardView({ searchQuery }: { searchQuery: string }) {
-  const filteredProjects = projects.filter((project) => project.title.toLowerCase().includes(searchQuery.toLowerCase()));
-  const visibleProjects = searchQuery ? filteredProjects : projects;
+  const { data: health } = useQuery<HealthResponse>({ queryKey: ['health'], queryFn: () => fetchApi('/api/v1/health') });
+  const { data: clients = [] } = useQuery<Client[]>({ queryKey: ['clients'], queryFn: () => fetchApi('/api/v1/clients') });
+  const { data: projects = [] } = useQuery<Project[]>({ queryKey: ['projects'], queryFn: () => fetchApi('/api/v1/projects') });
+
+  const stats = [
+    { label: 'Total Projects', value: String(projects.length), detail: 'From API', primary: true },
+    { label: 'Total Clients', value: String(clients.length), detail: 'From API' },
+    { label: 'Running Projects', value: String(projects.filter((p: Project) => p.status === 'active').length), detail: 'Active' },
+    { label: 'API Status', value: health?.status === 'ok' ? 'Online' : 'Offline', detail: health?.service || 'Unknown' },
+  ];
+
+  const visibleProjects = projects
+    .filter((p: Project) => p.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    .map((p: Project, i: number) => ({
+      icon: [Zap, Layers3, Code2, CalendarDays][i % 4],
+      color: ['bg-blue-500', 'bg-cyan-500', 'bg-emerald-500', 'bg-violet-500'][i % 4],
+      title: p.name,
+      due: 'TBD',
+      health: p.status,
+      progress: 0,
+    }));
 
   return (
     <div className="space-y-4 md:space-y-5">
