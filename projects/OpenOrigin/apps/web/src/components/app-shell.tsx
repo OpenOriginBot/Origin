@@ -39,7 +39,7 @@ export function AppShell({ children }: AppShellProps) {
       <div className="p-4">
         <header
           className={cn(
-            'flex min-h-16 items-center justify-between gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:px-6 lg:py-3',
+            'sticky top-4 z-20 flex min-h-16 items-center justify-between gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:px-6 lg:py-3',
             isDark
               ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
               : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
