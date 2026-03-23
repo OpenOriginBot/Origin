@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from functools import lru_cache
-from typing import List, Union
+from typing import Any, List
 
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -19,13 +19,25 @@ class Settings(BaseSettings):
 
     @field_validator('cors_origins', mode='before')
     @classmethod
-    def parse_cors_origins(cls, value: str | list[str]) -> list[str]:
+    def parse_cors_origins(cls, value: Any) -> list[str]:
+        if value is None:
+            return []
+
         if isinstance(value, str):
             value = value.strip()
+            if not value:
+                return []
             if value.startswith('['):
                 import json
-                return json.loads(value)
+
+                parsed = json.loads(value)
+                if isinstance(parsed, list):
+                    return [str(item).strip() for item in parsed if str(item).strip()]
             return [item.strip() for item in value.split(',') if item.strip()]
+
+        if isinstance(value, list):
+            return [str(item).strip() for item in value if str(item).strip()]
+
         return value
 
 
