@@ -37,9 +37,6 @@ function BrandMark() {
 }
 
 function NavGroup({ title, items }: { title: string; items: NavigationItem[] }) {
-  const { theme } = useUIStore();
-  const isDark = theme === 'dark';
-
   return (
     <div>
       <p className="mb-2 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">{title}</p>
@@ -56,16 +53,7 @@ function NavGroup({ title, items }: { title: string; items: NavigationItem[] }) 
           >
             <Icon className="h-4 w-4" />
             <span className="text-sm">{label}</span>
-            {badge ? (
-              <span
-                className={cn(
-                  'ml-auto rounded-full px-1.5 py-0.5 text-[10px] font-semibold',
-                  isDark ? 'bg-primary text-primary-foreground' : 'bg-primary text-primary-foreground',
-                )}
-              >
-                {badge}
-              </span>
-            ) : null}
+            {badge ? <span className="ml-auto rounded-full bg-primary px-1.5 py-0.5 text-[10px] font-semibold text-primary-foreground">{badge}</span> : null}
           </button>
         ))}
       </nav>
@@ -74,7 +62,7 @@ function NavGroup({ title, items }: { title: string; items: NavigationItem[] }) 
 }
 
 export function AppShell({ children }: AppShellProps) {
-  const { sidebarOpen, setSidebarOpen, theme } = useUIStore();
+  const { sidebarOpen, setSidebarOpen } = useUIStore();
   const menuItems = navigation.filter((item) => item.section === 'menu');
   const generalItems = navigation.filter((item) => item.section === 'general');
 
@@ -82,7 +70,7 @@ export function AppShell({ children }: AppShellProps) {
     <div className="flex min-h-screen bg-background text-foreground">
       {sidebarOpen ? (
         <aside className="hidden h-screen w-64 shrink-0 overflow-y-auto border-r border-border bg-card p-4 lg:fixed lg:left-0 lg:top-0 lg:block">
-          <div className="group mb-6 flex cursor-pointer items-center gap-2">
+          <div className="group mb-6 cursor-pointer">
             <a className="flex items-center gap-2" href="#">
               <BrandMark />
               <span className="text-lg font-semibold text-foreground">Tasko</span>
