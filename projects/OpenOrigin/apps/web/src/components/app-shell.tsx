@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { BriefcaseBusiness, FolderKanban, Menu, Moon, SunMedium, Users } from 'lucide-react';
+import { Bell, BriefcaseBusiness, FolderKanban, Mail, Menu, Moon, Search, SunMedium, Users, Wallet } from 'lucide-react';
 import { useUIStore } from '@/store/ui-store';
 import { cn } from '@/lib/utils';
 
@@ -76,27 +76,77 @@ export function AppShell({ children }: AppShellProps) {
       <div className="min-w-0 flex-1 p-4 md:pl-6">
         <header
           className={cn(
-            'flex min-h-16 flex-col gap-4 rounded-[24px] border px-4 py-4 transition-colors duration-300 sm:h-16 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-0',
+            'flex min-h-16 flex-col gap-3 rounded-[18px] border px-4 py-4 transition-colors duration-300 lg:flex-row lg:items-center lg:justify-between lg:px-6 lg:py-3',
             isDark
               ? 'border-white/10 bg-[#111214] shadow-[0_10px_30px_rgba(0,0,0,0.22)]'
               : 'border-black/10 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.06)]',
           )}
         >
-          <div className="min-w-0">
-            <h1 className="text-lg font-semibold">Executive Assistant Workspace</h1>
-            <p className={cn('text-sm leading-6 sm:leading-normal', isDark ? 'text-zinc-400' : 'text-zinc-500')}>Client operations, project execution, and delegation.</p>
+          <div
+            className={cn(
+              'flex h-11 w-full items-center gap-3 rounded-xl border px-4',
+              isDark ? 'border-white/10 bg-white/[0.04] text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-600',
+            )}
+          >
+            <Search className="h-4 w-4" />
+            <input
+              type="text"
+              placeholder="Search clients, projects, tasks"
+              className={cn(
+                'w-full bg-transparent text-sm outline-none placeholder:text-inherit',
+                isDark ? 'text-zinc-100' : 'text-zinc-900',
+              )}
+            />
           </div>
 
-          <button
-            className={cn(
-              'inline-flex w-full items-center justify-center gap-2 rounded-2xl border px-3 py-2 text-sm transition-colors sm:w-auto',
-              isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
-            )}
-            onClick={toggleTheme}
-          >
-            {isDark ? <SunMedium className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            {isDark ? 'Light' : 'Dark'}
-          </button>
+          <div className="flex items-center justify-end gap-2">
+            <button
+              className={cn(
+                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+              )}
+              aria-label="Mail"
+            >
+              <Mail className="h-4 w-4" />
+            </button>
+            <button
+              className={cn(
+                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+              )}
+              aria-label="Wallet"
+            >
+              <Wallet className="h-4 w-4" />
+            </button>
+            <button
+              className={cn(
+                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+              )}
+              aria-label="Notifications"
+            >
+              <Bell className="h-4 w-4" />
+            </button>
+            <button
+              className={cn(
+                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+              )}
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {isDark ? <SunMedium className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+            <button
+              className={cn(
+                'inline-flex h-10 min-w-10 items-center justify-center rounded-xl border px-3 transition-colors',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
+              )}
+              aria-label="User profile"
+            >
+              <Users className="h-4 w-4" />
+            </button>
+          </div>
         </header>
 
         <main className="pt-6">{children}</main>
