@@ -22,7 +22,7 @@ const navigation: NavigationItem[] = [
   { label: 'Analytics', icon: ChartColumn, section: 'menu' },
   { label: 'Team', icon: Users, section: 'menu' },
   { label: 'Settings', icon: Settings, section: 'general' },
-  { label: 'Help', icon: Bell, section: 'general' },
+  { label: 'Help', icon: CircleHelp, section: 'general' },
   { label: 'Logout', icon: LogOut, section: 'general' },
 ];
 

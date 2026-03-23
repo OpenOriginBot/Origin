@@ -34,7 +34,7 @@ function StatCard({ label, value, detail, primary }: { label: string; value: str
     <Card
       className={cn(
         'cursor-pointer p-4 transition-all duration-500 ease-out hover:shadow-xl',
-        primary ? 'bg-primary text-primary-foreground shadow-lg' : 'bg-card text-foreground shadow-lg',
+        primary ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' : 'bg-card text-foreground shadow-lg',
       )}
     >
       <div className="mb-3 flex items-start justify-between">
