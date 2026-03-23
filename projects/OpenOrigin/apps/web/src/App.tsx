@@ -34,7 +34,7 @@ function StatCard({ label, value, detail, primary }: { label: string; value: str
     <Card
       className={cn(
         'cursor-pointer p-3.5 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.05] hover:shadow-2xl md:p-4',
-        primary ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30' : 'bg-card text-foreground shadow-lg',
+        primary ? 'bg-[hsl(221.2_83.2%_53.3%)] text-primary-foreground shadow-lg shadow-[0_18px_40px_rgba(59,130,246,0.28)] hover:shadow-[0_24px_50px_rgba(59,130,246,0.36)]' : 'bg-card text-foreground shadow-lg',
       )}
     >
       <div className="mb-2.5 flex items-start justify-between">
@@ -91,7 +91,7 @@ export default function App() {
 
         <div className="grid grid-cols-1 gap-3 md:gap-4 lg:grid-cols-3">
           <div className="space-y-3 md:space-y-4 lg:col-span-2">
-            <Card className="bg-gradient-to-br from-background to-muted/20 p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
+            <Card className="bg-gradient-to-br from-background to-muted/20 p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl lg:p-6">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-foreground">Project Analytics</h2>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
