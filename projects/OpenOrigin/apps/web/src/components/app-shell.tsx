@@ -50,7 +50,7 @@ export function AppShell({ children }: AppShellProps) {
             )}
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
-            <Menu className="h-4 w-4" />
+            <Menu className="h-3.5 w-3.5" />
           </button>
         </div>
 
@@ -66,7 +66,7 @@ export function AppShell({ children }: AppShellProps) {
                 !active && !isDark && 'text-zinc-700 hover:bg-black/[0.04] hover:text-black',
               )}
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-3.5 w-3.5" />
               {sidebarOpen ? <span>{label}</span> : null}
             </button>
           ))}
@@ -84,16 +84,16 @@ export function AppShell({ children }: AppShellProps) {
         >
           <div
             className={cn(
-              'flex h-11 w-full items-center gap-3 rounded-xl border px-4',
+              'flex h-10 w-full items-center gap-2 rounded-xl border px-3 lg:w-1/2',
               isDark ? 'border-white/10 bg-white/[0.04] text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-600',
             )}
           >
-            <Search className="h-4 w-4" />
+            <Search className="h-3.5 w-3.5" />
             <input
               type="text"
               placeholder="Search clients, projects, tasks"
               className={cn(
-                'w-full bg-transparent text-sm outline-none placeholder:text-inherit',
+                'w-full bg-transparent text-xs outline-none placeholder:text-inherit',
                 isDark ? 'text-zinc-100' : 'text-zinc-900',
               )}
             />
@@ -102,49 +102,49 @@ export function AppShell({ children }: AppShellProps) {
           <div className="flex items-center justify-end gap-2">
             <button
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               aria-label="Mail"
             >
-              <Mail className="h-4 w-4" />
+              <Mail className="h-3.5 w-3.5" />
             </button>
             <button
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               aria-label="Wallet"
             >
-              <Wallet className="h-4 w-4" />
+              <Wallet className="h-3.5 w-3.5" />
             </button>
             <button
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               aria-label="Notifications"
             >
-              <Bell className="h-4 w-4" />
+              <Bell className="h-3.5 w-3.5" />
             </button>
             <button
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
-              {isDark ? <SunMedium className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              {isDark ? <SunMedium className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
             </button>
             <button
               className={cn(
-                'inline-flex h-10 min-w-10 items-center justify-center rounded-xl border px-3 transition-colors',
+                'inline-flex h-9 min-w-9 items-center justify-center rounded-xl border px-2.5 transition-colors',
                 isDark ? 'border-white/10 bg-white/5 text-zinc-200' : 'border-black/10 bg-black/[0.03] text-zinc-800',
               )}
               aria-label="User profile"
             >
-              <Users className="h-4 w-4" />
+              <Users className="h-3.5 w-3.5" />
             </button>
           </div>
         </header>
