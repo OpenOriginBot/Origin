@@ -34,15 +34,15 @@ export function AppShell({ children }: AppShellProps) {
     >
       <aside
         className={cn(
-          'm-4 mr-0 hidden rounded-[28px] border transition-all duration-300 md:block',
-          sidebarOpen ? 'md:w-72' : 'md:w-20',
+          'm-4 mr-0 hidden rounded-[28px] border transition-all duration-300',
+          sidebarOpen ? 'md:block md:w-72' : 'md:hidden',
           isDark
             ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
             : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]',
         )}
       >
         <div className="flex h-16 items-center justify-between px-4">
-          <div className={cn('flex items-center gap-3', !sidebarOpen && 'hidden')}>
+          <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-emerald-400 text-xs font-semibold text-white shadow-[0_8px_24px_rgba(59,130,246,0.28)]">
               OO
             </div>
