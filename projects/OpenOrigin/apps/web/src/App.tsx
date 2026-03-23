@@ -33,7 +33,7 @@ function StatCard({ label, value, detail, primary }: { label: string; value: str
   return (
     <Card
       className={cn(
-        'cursor-pointer p-4 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl',
+        'cursor-pointer p-4 transition-all duration-500 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:shadow-2xl',
         primary ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30' : 'bg-card text-foreground shadow-lg',
       )}
     >
