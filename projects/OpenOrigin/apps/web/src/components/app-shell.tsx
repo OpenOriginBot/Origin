@@ -43,12 +43,7 @@ export function AppShell({ children }: AppShellProps) {
       >
         <div className="flex h-16 items-center justify-between px-4">
           <div className={cn('flex items-center gap-3', !sidebarOpen && 'hidden')}>
-            <div
-              className={cn(
-                'flex h-9 w-9 items-center justify-center rounded-full border text-xs font-semibold',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-100' : 'border-black/10 bg-black/[0.03] text-zinc-900',
-              )}
-            >
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-emerald-400 text-xs font-semibold text-white shadow-[0_8px_24px_rgba(59,130,246,0.28)]">
               OO
             </div>
             <div className="font-semibold tracking-tight">OpenOrigin</div>
@@ -93,12 +88,7 @@ export function AppShell({ children }: AppShellProps) {
           )}
         >
           <div className="flex min-w-0 items-center gap-3 lg:hidden">
-            <div
-              className={cn(
-                'flex h-9 w-9 items-center justify-center rounded-full border text-xs font-semibold',
-                isDark ? 'border-white/10 bg-white/5 text-zinc-100' : 'border-black/10 bg-black/[0.03] text-zinc-900',
-              )}
-            >
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 via-cyan-400 to-emerald-400 text-xs font-semibold text-white shadow-[0_8px_24px_rgba(59,130,246,0.28)]">
               OO
             </div>
             <div className="min-w-0">
