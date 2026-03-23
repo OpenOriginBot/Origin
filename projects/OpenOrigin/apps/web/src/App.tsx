@@ -33,8 +33,8 @@ function StatCard({ label, value, detail, primary }: { label: string; value: str
   return (
     <Card
       className={cn(
-        'cursor-pointer p-4 transition-all duration-500 ease-out hover:shadow-xl',
-        primary ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' : 'bg-card text-foreground shadow-lg',
+        'cursor-pointer p-4 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl',
+        primary ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20 hover:shadow-primary/30' : 'bg-card text-foreground shadow-lg',
       )}
     >
       <div className="mb-3 flex items-start justify-between">
@@ -74,10 +74,10 @@ export default function App() {
       </div>
 
       <div className="flex flex-col gap-2 sm:flex-row">
-        <button className="h-9 w-full rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 sm:w-auto">
+        <button className="h-9 w-full rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-lg hover:shadow-primary/30 sm:w-auto">
           + Add Project
         </button>
-        <button className="h-9 w-full rounded-md border border-border bg-transparent px-4 text-sm font-medium transition-all duration-300 hover:scale-105 hover:shadow-md sm:w-auto">
+        <button className="h-9 w-full rounded-md border border-border bg-transparent px-4 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-md sm:w-auto">
           Import Data
         </button>
       </div>
@@ -91,7 +91,7 @@ export default function App() {
 
         <div className="grid grid-cols-1 gap-3 md:gap-4 lg:grid-cols-3">
           <div className="space-y-3 md:space-y-4 lg:col-span-2">
-            <Card className="bg-gradient-to-br from-background to-muted/20 p-6 transition-all duration-500 hover:shadow-xl">
+            <Card className="bg-gradient-to-br from-background to-muted/20 p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-foreground">Project Analytics</h2>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -123,7 +123,7 @@ export default function App() {
               </div>
             </Card>
 
-            <Card className="p-6 transition-all duration-500 hover:shadow-xl">
+            <Card className="p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
               <div className="mb-6 flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-foreground">Team Collaboration</h2>
                 <button className="inline-flex h-8 items-center rounded-md border border-border bg-transparent px-3 text-sm transition-all duration-300 hover:scale-105">
@@ -152,7 +152,7 @@ export default function App() {
           </div>
 
           <div className="space-y-3 md:space-y-4">
-            <Card className="p-6 transition-all duration-500 hover:shadow-xl">
+            <Card className="p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
               <h2 className="mb-6 text-xl font-semibold text-foreground">Reminders</h2>
               <div className="space-y-4">
                 <div className="rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg">
@@ -166,7 +166,7 @@ export default function App() {
               </div>
             </Card>
 
-            <Card className="overflow-hidden p-4 transition-all duration-500 hover:shadow-xl">
+            <Card className="overflow-hidden p-4 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
               <h2 className="mb-4 text-lg font-semibold text-foreground">Project Progress</h2>
               <div className="flex flex-col items-center">
                 <div className="relative mb-4 h-40 w-40">
@@ -197,7 +197,7 @@ export default function App() {
         </div>
 
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
-          <Card className="p-6 transition-all duration-500 hover:shadow-xl">
+          <Card className="p-6 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-xl font-semibold text-foreground">Project</h2>
               <button className="inline-flex h-8 items-center rounded-md border border-border bg-transparent px-3 text-sm transition-all duration-300 hover:scale-105">
@@ -221,7 +221,7 @@ export default function App() {
             </div>
           </Card>
 
-          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:shadow-2xl">
+          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
             <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
               <svg className="absolute bottom-0 h-[100px] w-full" viewBox="0 0 200 60" preserveAspectRatio="none">
                 <path d="M0,30 Q25,15 50,30 T100,30 T150,30 T200,30 L200,60 L0,60 Z" fill="oklch(0.42 0.15 155)" opacity="0.3" />
@@ -251,7 +251,7 @@ export default function App() {
             </div>
           </Card>
 
-          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:shadow-2xl">
+          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
             <div className="absolute right-0 top-0 h-full w-48 opacity-15">
               {[0, 50, 100, 150, 200, 250].map((top, index) => (
                 <svg key={index} className="absolute" style={{ top, right: -index * 10, width: 150, height: 80 }} viewBox="0 0 100 50" preserveAspectRatio="none">

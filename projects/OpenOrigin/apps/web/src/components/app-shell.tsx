@@ -48,7 +48,7 @@ function NavGroup({ title, items }: { title: string; items: NavigationItem[] }) 
           <button
             key={label}
             className={cn(
-              'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm font-medium transition-all duration-300',
+              'flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm font-medium transition-all duration-300 hover:translate-x-1',
               active
                 ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20'
                 : 'text-muted-foreground hover:bg-secondary hover:text-foreground',
@@ -121,10 +121,10 @@ export function AppShell({ children }: AppShellProps) {
             </div>
 
             <div className="flex items-center gap-1.5 md:gap-2">
-              <button className="relative inline-flex h-8 w-8 items-center justify-center rounded-md transition-all duration-300 hover:scale-110 hover:bg-secondary">
+              <button className="relative inline-flex h-8 w-8 items-center justify-center rounded-md transition-all duration-300 hover:scale-110 hover:bg-secondary hover:shadow-sm">
                 <Mail className="h-4 w-4" />
               </button>
-              <button className="relative inline-flex h-8 w-8 items-center justify-center rounded-md transition-all duration-300 hover:scale-110 hover:bg-secondary">
+              <button className="relative inline-flex h-8 w-8 items-center justify-center rounded-md transition-all duration-300 hover:scale-110 hover:bg-secondary hover:shadow-sm">
                 <Bell className="h-4 w-4" />
                 <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-destructive" />
               </button>
