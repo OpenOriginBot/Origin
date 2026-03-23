@@ -101,14 +101,21 @@ export default function App() {
               </div>
 
               <div className="relative mb-4 h-64 overflow-hidden rounded-xl border border-border/60 bg-gradient-to-b from-background to-muted/30 p-5">
-                <div className="absolute inset-x-0 bottom-0 top-0 flex items-end gap-3 px-5 pb-5">
+                <div className="absolute inset-0 grid grid-rows-4 px-5 py-5">
+                  {[0, 1, 2, 3].map((row) => (
+                    <div key={row} className="border-b border-border/50 last:border-b-0" />
+                  ))}
+                </div>
+                <div className="absolute inset-x-0 bottom-0 flex h-full items-end gap-3 px-5 pb-5">
                   {[42, 55, 39, 66, 58, 78, 69, 88, 73, 92].map((height, index) => (
-                    <div key={index} className="flex flex-1 items-end justify-center">
-                      <div className="w-full rounded-t-full bg-primary/80" style={{ height: `${height}%` }} />
+                    <div key={index} className="flex h-full flex-1 items-end justify-center">
+                      <div
+                        className="w-full rounded-t-[10px] bg-primary shadow-[0_8px_18px_rgba(59,130,246,0.22)]"
+                        style={{ height: `${height}%` }}
+                      />
                     </div>
                   ))}
                 </div>
-                <div className="absolute inset-0 bg-[linear-gradient(to_top,transparent_0%,transparent_70%,rgba(255,255,255,0.02)_100%)]" />
               </div>
 
               <div className="flex items-center justify-between border-t border-muted/50 pt-4 text-sm">
