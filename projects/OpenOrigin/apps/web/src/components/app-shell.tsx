@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { BriefcaseBusiness, FolderKanban, Moon, PanelLeftClose, PanelLeftOpen, SunMedium, Users } from 'lucide-react';
+import { BriefcaseBusiness, FolderKanban, Menu, Moon, SunMedium, Users } from 'lucide-react';
 import { useUIStore } from '@/store/ui-store';
 import { cn } from '@/lib/utils';
 
@@ -21,7 +21,6 @@ const navigation: NavigationItem[] = [
 
 export function AppShell({ children }: AppShellProps) {
   const { sidebarOpen, setSidebarOpen, theme, toggleTheme } = useUIStore();
-  const ToggleIcon = sidebarOpen ? PanelLeftClose : PanelLeftOpen;
   const isDark = theme === 'dark';
 
   return (
@@ -35,8 +34,8 @@ export function AppShell({ children }: AppShellProps) {
     >
       <aside
         className={cn(
-          'm-4 mr-0 rounded-[28px] border transition-all duration-300',
-          sidebarOpen ? 'w-72' : 'w-20',
+          'm-4 mr-0 hidden rounded-[28px] border transition-all duration-300 md:block',
+          sidebarOpen ? 'md:w-72' : 'md:w-20',
           isDark
             ? 'border-white/10 bg-[#111214] shadow-[0_20px_60px_rgba(0,0,0,0.35)]'
             : 'border-black/10 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]',
@@ -46,12 +45,12 @@ export function AppShell({ children }: AppShellProps) {
           <div className={cn('font-semibold tracking-tight', !sidebarOpen && 'hidden')}>OpenOrigin</div>
           <button
             className={cn(
-              'inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
+              'hidden h-9 w-9 items-center justify-center rounded-xl border transition-colors md:inline-flex',
               isDark ? 'border-white/10 bg-white/5 text-zinc-300' : 'border-black/10 bg-black/[0.03] text-zinc-700',
             )}
             onClick={() => setSidebarOpen(!sidebarOpen)}
           >
-            <ToggleIcon className="h-4 w-4" />
+            <Menu className="h-4 w-4" />
           </button>
         </div>
 
@@ -74,7 +73,7 @@ export function AppShell({ children }: AppShellProps) {
         </nav>
       </aside>
 
-      <div className="flex-1 p-4 pl-6">
+      <div className="flex-1 p-4 md:pl-6">
         <header
           className={cn(
             'flex h-16 items-center justify-between rounded-[24px] border px-6 transition-colors duration-300',
