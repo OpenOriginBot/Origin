@@ -42,7 +42,17 @@ export function AppShell({ children }: AppShellProps) {
         )}
       >
         <div className="flex h-16 items-center justify-between px-4">
-          <div className={cn('font-semibold tracking-tight', !sidebarOpen && 'hidden')}>OpenOrigin</div>
+          <div className={cn('flex items-center gap-3', !sidebarOpen && 'hidden')}>
+            <div
+              className={cn(
+                'flex h-9 w-9 items-center justify-center rounded-full border text-xs font-semibold',
+                isDark ? 'border-white/10 bg-white/5 text-zinc-100' : 'border-black/10 bg-black/[0.03] text-zinc-900',
+              )}
+            >
+              OO
+            </div>
+            <div className="font-semibold tracking-tight">OpenOrigin</div>
+          </div>
           <button
             className={cn(
               'hidden h-9 w-9 items-center justify-center rounded-full border transition-colors md:inline-flex',
