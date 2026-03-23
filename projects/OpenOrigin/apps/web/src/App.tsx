@@ -1,18 +1,4 @@
-import {
-  Activity,
-  ArrowUpRight,
-  ChartColumn,
-  Clock3,
-  MonitorSmartphone,
-  Pause,
-  Play,
-  Plus,
-  Search,
-  Smartphone,
-  Square,
-  TrendingUp,
-  Video,
-} from 'lucide-react';
+import { ArrowUpRight, Plus, TrendingUp, Video } from 'lucide-react';
 import { AppShell } from '@/components/app-shell';
 import { cn } from '@/lib/utils';
 import { useUIStore } from '@/store/ui-store';
@@ -29,14 +15,6 @@ const teamMembers = [
   { name: 'Edwin Adenike', task: 'Integrate User Authentication System', status: 'In Progress', initials: 'EA', tone: 'amber' },
   { name: 'Isaac Oluwatemilorun', task: 'Develop Search and Filter Functionality', status: 'Pending', initials: 'IO', tone: 'rose' },
   { name: 'David Oshodi', task: 'Responsive Layout for Homepage', status: 'In Progress', initials: 'DO', tone: 'amber' },
-] as const;
-
-const projects = [
-  { emoji: '⚡', color: 'bg-blue-500', title: 'Develop API Endpoints', due: 'Nov 26, 2024' },
-  { emoji: '🌊', color: 'bg-cyan-500', title: 'Onboarding Flow', due: 'Nov 28, 2024' },
-  { emoji: '🎨', color: 'bg-emerald-500', title: 'Build Dashboard', due: 'Nov 30, 2024' },
-  { emoji: '⚡', color: 'bg-amber-500', title: 'Optimize Page Load', due: 'Dec 5, 2024' },
-  { emoji: '🔍', color: 'bg-purple-500', title: 'Cross-Browser Testing', due: 'Dec 6, 2024' },
 ] as const;
 
 function Card({ className, children }: { className?: string; children: React.ReactNode }) {
@@ -210,83 +188,6 @@ export default function App() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
-          <Card className="p-6 transition-all duration-500 hover:shadow-xl">
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-foreground">Project</h2>
-              <button className="inline-flex h-8 items-center rounded-md border border-border bg-transparent px-3 text-sm transition-all duration-300 hover:scale-105">
-                <Plus className="mr-1 h-4 w-4" />
-                New
-              </button>
-            </div>
-
-            <div className="space-y-3">
-              {projects.map((project) => (
-                <div key={project.title} className="group flex cursor-pointer items-center gap-3 rounded-lg p-3 transition-all duration-300 hover:bg-secondary">
-                  <div className={cn('flex h-10 w-10 items-center justify-center rounded-lg text-xl transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110', project.color)}>
-                    {project.emoji}
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-foreground">{project.title}</p>
-                    <p className="text-xs text-muted-foreground">Due date: {project.due}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:shadow-2xl">
-            <div className="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-              <svg className="absolute bottom-0 h-[100px] w-full" viewBox="0 0 200 60" preserveAspectRatio="none">
-                <path d="M0,30 Q25,15 50,30 T100,30 T150,30 T200,30 L200,60 L0,60 Z" fill="oklch(0.42 0.15 155)" opacity="0.3" />
-                <path d="M0,40 Q25,25 50,40 T100,40 T150,40 T200,40 L200,60 L0,60 Z" fill="oklch(0.42 0.15 155)" />
-              </svg>
-            </div>
-            <div className="relative z-10">
-              <Smartphone className="mb-3 h-6 w-6" />
-              <h2 className="mb-1 text-xl font-bold">Download our Mobile App</h2>
-              <p className="mb-4 text-xs opacity-80">Get easy in another way</p>
-              <div className="mb-4 flex flex-col gap-2">
-                <button className="flex h-10 items-center justify-start gap-2 rounded-md bg-background px-3 text-left text-foreground transition-all duration-300 hover:scale-105 hover:bg-background/90">
-                  <Smartphone className="h-5 w-5" />
-                  <div className="flex flex-col items-start">
-                    <span className="text-[10px] leading-none">Download on the</span>
-                    <span className="text-sm font-semibold leading-none">App Store</span>
-                  </div>
-                </button>
-                <button className="flex h-10 items-center justify-start gap-2 rounded-md bg-background px-3 text-left text-foreground transition-all duration-300 hover:scale-105 hover:bg-background/90">
-                  <MonitorSmartphone className="h-5 w-5" />
-                  <div className="flex flex-col items-start">
-                    <span className="text-[10px] leading-none">Get it on</span>
-                    <span className="text-sm font-semibold leading-none">Google Play</span>
-                  </div>
-                </button>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="group relative overflow-hidden bg-foreground p-4 text-background transition-all duration-500 hover:shadow-2xl">
-            <div className="absolute right-0 top-0 h-full w-48 opacity-15">
-              {[0, 50, 100, 150, 200, 250].map((top, index) => (
-                <svg key={index} className="absolute" style={{ top, right: -index * 10, width: 150, height: 80 }} viewBox="0 0 100 50" preserveAspectRatio="none">
-                  <path d="M0,25 Q12.5,10 25,25 T50,25 T75,25 T100,25" fill="none" stroke="oklch(0.42 0.15 155)" strokeWidth="2" />
-                </svg>
-              ))}
-            </div>
-            <div className="relative z-10">
-              <h2 className="mb-4 text-lg font-semibold">Time Tracker</h2>
-              <div className="mb-4 break-all font-mono text-4xl font-bold tracking-tight sm:text-5xl">24:00:08</div>
-              <div className="flex gap-3">
-                <button className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-background text-foreground transition-all duration-300 hover:scale-110 hover:bg-background/90">
-                  <Pause className="h-4 w-4" />
-                </button>
-                <button className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-destructive text-primary-foreground transition-all duration-300 hover:scale-110 hover:bg-destructive/90">
-                  <Square className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-          </Card>
-        </div>
       </div>
     </AppShell>
   );
